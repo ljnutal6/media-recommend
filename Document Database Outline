@@ -1,0 +1,105 @@
+User document:
+{
+	_id
+	username
+	password
+	email address (optional)
+	books
+	movies
+	tv shows
+	video games
+}
+
+Book document:
+{
+	_id
+	Title
+	Author(s)
+	Editor(s)
+	Illustrator(s)
+	Translator(s)
+	Original Publication date
+}
+
+Movie document:
+{
+	_id
+	Title
+	Release Year
+	MPAA Rating
+	Studio
+	Director
+	Leading Actors
+}
+
+TV Show document
+{
+	_id
+	Title
+	Producer
+	Number of seasons
+	Number of episodes
+	Leading Actors
+	Premier date
+}
+
+Video Game document
+{
+	_id
+	Title
+	Publisher
+	Developer
+	System
+	Release Year
+	ESRB Rating
+}
+
+
+Sample:
+
+user
+{
+	_id: 1
+	username: InsertUserHere
+	password: password
+	email address (optional): yay@xmail.com
+	books: [
+    {
+    	_id
+    	Title
+    	Author(s): [
+      	{
+          name
+      	}
+    	]
+    	Editor(s): [
+    	]
+    	Illustrator(s)
+    	Translator(s)
+    	Original Publication date
+    },
+    {
+    	_id
+    	Title
+    	Author(s)
+    	Editor(s)
+    	Illustrator(s)
+    	Translator(s)
+    	Original Publication date
+  	}
+	]
+	movies: [
+		{
+			_id
+			Title
+			Release Year
+			MPAA Rating
+			Studio
+			Director
+			Leading Actors: [
+			]
+		}
+	]
+	tv shows
+	video games
+}
