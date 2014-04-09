@@ -67,7 +67,7 @@
         <p>Username: <input type="text"></p><p>Password: <input type="text"></p>
         <p>Name (optional): <input type="text"></p>
         
-        <p><a href="file:///C:/Users/Joshua/Documents/GitHub/media-recommend/Design/EditMedia.html" class="btn btn-primary btn-lg" role="button">Finish creating account</a></p>
+       <p><a href="file:///C:/Users/Joshua/Documents/GitHub/media-recommend/Design/EditMedia.html" class="btn btn-primary btn-lg" role="button">Finish creating account</a></p>
 <p></p>
       </div>
     </div>
