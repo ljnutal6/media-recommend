@@ -17,30 +17,22 @@
           <a class="navbar-brand" href="Index.html">Recommedia</a>
         </div>
         
+        {% if loggedIn %}
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
-
-            {% if loggedIn %}
-              <font color="white">
-                {{ name }}
-              </font>
-              <button type="submit" class="btn btn-success">
-                Sign out
-              </button>
-            {% else %}
-              <div class="form-group">
-                <input type="text" name="username" placeholder="Username" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="password" name="password" placeholder="Password" class="form-control">
-              </div>
-              <button type="submit" class="btn btn-success">
-                Sign in
-              </button>
-            {% endif %}
-
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
           </form>
         </div>
+        
+        {% else %}
+        {% endif %}
+      
       </div>
     </div>
 
