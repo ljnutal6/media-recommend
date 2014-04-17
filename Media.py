@@ -1,9 +1,9 @@
 import pymongo
 from pymongo import MongoClient
 
-self.client = MongoClient()
-self.db = client.database
-self.collection = db.mediaCollection
+client = MongoClient()
+db = client.database
+collection = db.mediaCollection
     
 def add_book(title, authors, editors, illustrators, translators, publication):
     book = {"title": title, 
@@ -16,7 +16,7 @@ def add_book(title, authors, editors, illustrators, translators, publication):
     #for author in authors
     #    author_list.append(author)
         
-    book_id = self.collection.insert(book)
+    book_id = collection.insert(book)
     return book_id
         
 def add_movie(title, release, rating, studio, director, actors):
@@ -26,7 +26,7 @@ def add_movie(title, release, rating, studio, director, actors):
              "studio": studio, 
              "director": director,
              "leading actors": actors}
-    movie_id = self.collection.insert(movie)
+    movie_id = collection.insert(movie)
     return movie_id
     
 def add_tvshow(title, producer, seasons, episodes, actors, premier):
@@ -36,7 +36,7 @@ def add_tvshow(title, producer, seasons, episodes, actors, premier):
               "number of episodes": episodes, 
               "leading actors": actors, 
               "premier date": premier}
-    tvshow_id = self.collection.insert(tvshow)
+    tvshow_id = collection.insert(tvshow)
     return tvshow_id
     
 def add_videogame(title, publisher, system, release, rating):
@@ -46,8 +46,8 @@ def add_videogame(title, publisher, system, release, rating):
                  "system": system, 
                  "release year": release, 
                  "ESRB rating": rating}
-    game_id = self.collection.insert(videogame)
+    game_id = collection.insert(videogame)
     return game_id
     
 def find(id):
-    return self.collection.find_one({"_id": id})
+    return collection.find_one({"_id": id})
