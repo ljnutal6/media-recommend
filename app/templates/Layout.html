@@ -5,51 +5,41 @@
     <title>Recommedia</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
+      
         <div class="navbar-header">
           <a class="navbar-brand" href="Index.html">Recommedia</a>
         </div>
+        
+        {% if loggedIn %}
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
             <div class="form-group">
-              <input type="text" placeholder="Username" class="form-control">
+              <input type="text" name="username" placeholder="Username" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>
         </div>
+        
+        {% else %}
+        {% endif %}
+      
       </div>
     </div>
 
     <div class="jumbotron">
       <div class="container">
-        
-        <h1>Create an account</h1>
-
-        <p>
-          Username:
-          <input type="text" name="username">
-        </p>
-        
-        <p>
-          Password:
-          <input type="password" name="password">
-        </p>
-        
-        <p>
-          <a href="EditMedia.html" class="btn btn-primary btn-lg" role="button">
-            Finish creating account
-          </a>
-        </p>
-          
+        {% block content %}
+        {% endblock %}
       </div>
     </div>
 
@@ -57,7 +47,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 
   </body>
 </html>
