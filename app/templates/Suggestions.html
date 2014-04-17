@@ -6,63 +6,69 @@
   <div class="col-md-3">
     <p>Books</p>
     <ul class="list-group">
-      <li class="list-group-item">Book 1</li>
-      <li class="list-group-item">Book 2</li>
-      <li class="list-group-item">Book 3</li>
-      <li class="list-group-item">Book 4</li>
-      <li class="list-group-item">Book 5</li>
+      {% for book in books %}
+        <li class="list-group-item">{{ book }}</li>
+      {% endfor %}
     </ul>
   </div>
 
   <div class="col-md-3">
     <p>Shows</p>
     <ul class="list-group">
-      <li class="list-group-item">Show 1</li>
-      <li class="list-group-item">Show 2</li>
-      <li class="list-group-item">Show 3</li>
-      <li class="list-group-item">Show 4</li>
-      <li class="list-group-item">Show 5</li>
+      {% for show in shows %}
+        <li class="list-group-item">{{ show }}</li>
+      {% endfor %}
     </ul>
   </div>
 
   <div class="col-md-3">
     <p>Movies</p>
     <ul class="list-group">
-      <li class="list-group-item">Movie 1</li>
-      <li class="list-group-item">Movie 2</li>
-      <li class="list-group-item">Movie 3</li>
-      <li class="list-group-item">Movie 4</li>
-      <li class="list-group-item">Movie 5</li>
+      {% for movie in movies %}
+        <li class="list-group-item">{{ movie }}</li>
+      {% endfor %}
     </ul>
   </div>
 
   <div class="col-md-3">
     <p>Games</p>
     <ul class="list-group">
-      <li class="list-group-item">Game 1</li>
-      <li class="list-group-item">Game 2</li>
-      <li class="list-group-item">Game 3</li>
-      <li class="list-group-item">Game 4</li>
-      <li class="list-group-item">Game 5</li>
+      {% for game in games %}
+        <li class="list-group-item">{{ game }}</li>
+      {% endfor %}
     </ul>
   </div>
 
   {% if loggedIn %}
     <p>
-      <h1>
         <a href="Index.html" class="btn btn-primary btn-lg" role="button">
           Go back and edit media
         </a>
-      </h1>
     </p>
   {% else %}
-    <p>
-      <h1>
-        <a href="CreateAccount.html" class="btn btn-primary btn-lg" role="button">
-          Save results and make an account
-        </a>
-      </h1>
-    </p>
+    <form action="CreateAccount.html" method="GET">
+      {% for book in submittedBooks %}
+        <input type="hidden" value="{{ book }}">
+      {% endfor %}
+
+      {% for show in submittedShows %}
+        <input type="hidden" value="{{ show }}">
+      {% endfor %}
+
+      {% for movie in submittedMovies %}
+        <input type="hidden" value="{{ movie }}">
+      {% endfor %}
+
+      {% for game in submittedGames %}
+        <input type="hidden" value="{{ game }}">
+      {% endfor %}
+
+      <p>
+          <button type="submit" class="btn btn-primary btn-lg" role="button">
+            Make an account to store media
+          </button>
+      </p>
+    </form>
   {% endif %}
 
 {% endblock %}

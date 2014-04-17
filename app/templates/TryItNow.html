@@ -3,47 +3,49 @@
 {% block content %}
   <h1>What do you like?</h1>
 
-  <div class="col-md-3">
-    <p>Books</p>
-    <input type="text" name="book1">
-    <input type="text" name="book2">
-    <input type="text" name="book3">
-    <input type="text" name="book4">
-    <input type="text" name="book5">
-  </div>
+  <form action="Suggestions.html" method="POST">
+    <div class="col-md-3">
+      <p>Books</p>
+      <input type="text" name="book">
+      <input type="text" name="book">
+      <input type="text" name="book">
+      <input type="text" name="book">
+      <input type="text" name="book">
+    </div>
 
-  <div class="col-md-3">
-    <p>Shows</p>  
-    <input type="text" name="show1">
-    <input type="text" name="show2">
-    <input type="text" name="show3">
-    <input type="text" name="show4">
-    <input type="text" name="show5">
-  </div>
+    <div class="col-md-3">
+      <p>Shows</p>  
+      <input type="text" name="show">
+      <input type="text" name="show">
+      <input type="text" name="show">
+      <input type="text" name="show">
+      <input type="text" name="show">
+    </div>
 
-  <div class="col-md-3">
-    <p>Movies</p>    
-    <input type="text" name="movie1">
-    <input type="text" name="movie2">
-    <input type="text" name="movie3">
-    <input type="text" name="movie4">
-    <input type="text" name="movie5">
-  </div>
+    <div class="col-md-3">
+      <p>Movies</p>    
+      <input type="text" name="movie">
+      <input type="text" name="movie">
+      <input type="text" name="movie">
+      <input type="text" name="movie">
+      <input type="text" name="movie">
+    </div>
 
-  <div class="col-md-3">
-    <p>Games</p>
-    <input type="text" name="game1">
-    <input type="text" name="game2">
-    <input type="text" name="game3">
-    <input type="text" name="game4">
-    <input type="text" name="game5">
-  </div>
+    <div class="col-md-3">
+      <p>Games</p>
+      <input type="text" name="game">
+      <input type="text" name="game">
+      <input type="text" name="game">
+      <input type="text" name="game">
+      <input type="text" name="game">
+    </div>
 
-  <p>
-    <h1>
-      <a href="Suggestions.html" class="btn btn-primary btn-lg" role="button">
-        Find out what you'll like!
-      </a>
-    </h1>
-  </p>
+    <p>
+      <h1>
+        <button type="submit" class="btn btn-primary btn-lg" role="button">
+          Find out what you'll like!
+        </button>
+      </h1>
+    </p>
+  <form>
 {% endblock %}

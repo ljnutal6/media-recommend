@@ -3,86 +3,80 @@
 {% block content %}
   {% if loggedIn %}
     <h1>Edit media</h1>
+    <form action="Suggestions.html" method="POST">
+      <div class="col-md-3">
+        <p>Books</p>
+        <ul class="list-group">
+          {% for book in books %}
+            <li class="list-group-item">{{ book }}</li>
+          {% endfor %}
 
-    <div class="col-md-3">
-      <p>Books</p>
-      <ul class="list-group">
-        <li class="list-group-item">Book 1</li>
-        <li class="list-group-item">Book 2</li>
-        <li class="list-group-item">Book 3</li>
-        <li class="list-group-item">Book 4</li>
-        <li class="list-group-item">Book 5</li>
-      </ul>
-      
-      <p>Add books</p>
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-    </div>
+        </ul>
+        
+        <p>Add books</p>
+        <input type="text" name="book">
+        <input type="text" name="book">
+        <input type="text" name="book">
+        <input type="text" name="book">
+        <input type="text" name="book">
+      </div>
 
-    <div class="col-md-3">
-      <p>Shows</p>
-      <ul class="list-group">
-        <li class="list-group-item">Show 1</li>
-        <li class="list-group-item">Show 2</li>
-        <li class="list-group-item">Show 3</li>
-        <li class="list-group-item">Show 4</li>
-        <li class="list-group-item">Show 5</li>
-      </ul>
-      
-      <p>Add shows</p>
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-    </div>
+      <div class="col-md-3">
+        <p>Shows</p>
+        <ul class="list-group">
+          {% for show in shows %}
+            <li class="list-group-item">{{ show }}</li>
+          {% endfor %}
+        </ul>
+        
+        <p>Add shows</p>
+        <input type="text" name="show">
+        <input type="text" name="show">
+        <input type="text" name="show">
+        <input type="text" name="show">
+        <input type="text" name="show">
+      </div>
 
-    <div class="col-md-3">
-      <p>Movies</p>
-      <ul class="list-group">
-        <li class="list-group-item">Movie 1</li>
-        <li class="list-group-item">Movie 2</li>
-        <li class="list-group-item">Movie 3</li>
-        <li class="list-group-item">Movie 4</li>
-        <li class="list-group-item">Movie 5</li>
-      </ul>
-      
-      <p>Add movies</p>
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-    </div>
+      <div class="col-md-3">
+        <p>Movies</p>
+        <ul class="list-group">
+          {% for movie in movies %}
+            <li class="list-group-item">{{ movie }}</li>
+          {% endfor %}
+        </ul>
+        
+        <p>Add movies</p>
+        <input type="text" name="movie">
+        <input type="text" name="movie">
+        <input type="text" name="movie">
+        <input type="text" name="movie">
+        <input type="text" name="movie">
+      </div>
 
-    <div class="col-md-3">
-      <p>Games</p>
-      <ul class="list-group">
-        <li class="list-group-item">Game 1</li>
-        <li class="list-group-item">Game 2</li>
-        <li class="list-group-item">Game 3</li>
-        <li class="list-group-item">Game 4</li>
-        <li class="list-group-item">Game 5</li>
-      </ul>
-      
-      <p>Add movies</p>
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-      <input type="text">
-    </div>
+      <div class="col-md-3">
+        <p>Games</p>
+        <ul class="list-group">
+          {% for game in games %}
+            <li class="list-group-item">{{ game }}</li>
+          {% endfor %}
+        </ul>
+        
+        <p>Add movies</p>
+        <input type="text" name="game">
+        <input type="text" name="game">
+        <input type="text" name="game">
+        <input type="text" name="game">
+        <input type="text" name="game">
+      </div>
 
-    <p>
-      <h1>
-        <a href="Suggestions.html" class="btn btn-primary btn-lg" role="button">
-          See suggestions
-        </a>
-      </h1>
-    </p>
+      <p>
+        <h1>
+          <button type="submit" class="btn btn-primary btn-lg" role="button">
+            See suggestions
+          </a>
+        </h1>
+      </p>
+    </form>
   {% else %}
     <h1>Recommedia</h1>
     <p>

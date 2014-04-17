@@ -18,16 +18,16 @@
         </div>
         
         <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
+          <form class="navbar-form navbar-right" role="form"
 
-            {% if loggedIn %}
+            {% if loggedIn %}action="logout" method="POST">
               <font color="white">
                 {{ name }}
               </font>
               <button type="submit" class="btn btn-success">
                 Sign out
               </button>
-            {% else %}
+            {% else %}action="login" method="POST">
               <div class="form-group">
                 <input type="text" name="username" placeholder="Username" class="form-control">
               </div>
