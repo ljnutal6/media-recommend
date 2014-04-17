@@ -1,5 +1,20 @@
-from flask import render_template
-from app import app
+from flask import render_template, redirect, url_for, request, flash
+from app import app, lm
+from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
+from flask.ext.wtf import Form
+
+@lm.user_loader
+def load_user(userid):
+    return User.get(userid)
+
+@app.route("/login",  methods=["GET", "POST"])
+def login():
+    form = request.form
+    print request.form.data
+    '''login_user(user)'''
+    flash("Logged in successfully.")
+    return redirect(request.args.get("next") or url_for("index"))
+    
 
 #Index Routing
 @app.route('/')
@@ -7,7 +22,6 @@ from app import app
 @app.route('/Index.html')
 def index():
     return render_template("Index.html")
-
 
 #Try It Now routing
 @app.route('/TryItNow.html')
