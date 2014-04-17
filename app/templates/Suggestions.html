@@ -48,19 +48,19 @@
   {% else %}
     <form action="CreateAccount.html" method="GET">
       {% for book in submittedBooks %}
-        <input type="hidden" value="{{ book }}">
+        <input type="hidden" name="book" value="{{ book }}">
       {% endfor %}
 
       {% for show in submittedShows %}
-        <input type="hidden" value="{{ show }}">
+        <input type="hidden" name="show" value="{{ show }}">
       {% endfor %}
 
       {% for movie in submittedMovies %}
-        <input type="hidden" value="{{ movie }}">
+        <input type="hidden" name="movie" value="{{ movie }}">
       {% endfor %}
 
       {% for game in submittedGames %}
-        <input type="hidden" value="{{ game }}">
+        <input type="hidden" name="game" value="{{ game }}">
       {% endfor %}
 
       <p>
