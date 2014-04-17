@@ -4,8 +4,8 @@ from pymongo import MongoClient
 class Users:
     def __init__(self):
         self.client = MongoClient()
-        self.db = client.database
-        self.collection = db.userCollection
+        self.db = self.client.database
+        self.collection = self.db.userCollection
         #self.userDoc = open("users.txt", "a")
     
     def add_user(self, username, password, email):
