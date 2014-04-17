@@ -4,6 +4,22 @@
   <h1>Create an account</h1>
 
   <form action="" method="POST">
+    {% for book in books %}
+      <input type="hidden" name="book" value="{{ book }}">
+    {% endfor %}
+
+    {% for show in shows %}
+      <input type="hidden" name="show" value="{{ show }}">
+    {% endfor %}
+
+    {% for movie in movies %}
+      <input type="hidden" name="movie" value="{{ movie }}">
+    {% endfor %}
+
+    {% for game in games %}
+      <input type="hidden" name="game" value="{{ game }}">
+    {% endfor %}
+
     <p>
       Username:
       <input type="text" name="username">
