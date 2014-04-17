@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request, flash
 from app import app, lm
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
-from flask.ext.wtf import Form
+from forms import LoginForm
 
 @lm.user_loader
 def load_user(userid):
@@ -9,9 +9,11 @@ def load_user(userid):
 
 @app.route("/login",  methods=["GET", "POST"])
 def login():
-    form = request.form
-    print request.form.data
-    '''login_user(user)'''
+    form = LoginForm(request.form)
+    username = form.username.data
+    password = form.password.data
+    print username
+    print password
     flash("Logged in successfully.")
     return redirect(request.args.get("next") or url_for("index"))
     
