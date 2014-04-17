@@ -1,18 +1,102 @@
 {% extends "Layout.html" %}
 
 {% block content %}
-  <h1>Recommedia</h1>
-  <p>
-    Do you want to find out what books, shows, movies and games you will like? We make recommendations suited to your tastes!
-  </p>
-  <p>
-    <a href="TryItNow.html" class="btn btn-primary btn-lg" role="button">
-      Try it out now!
-    </a>
-  </p>
-  <p>
-    <a href="CreateAccount.html" class="btn btn-primary btn-lg" role="button">
-      Make an account
-    </a>
-  </p>
+  {% if loggedIn %}
+    <h1>Edit media</h1>
+
+    <div class="col-md-3">
+      <p>Books</p>
+      <ul class="list-group">
+        <li class="list-group-item">Book 1</li>
+        <li class="list-group-item">Book 2</li>
+        <li class="list-group-item">Book 3</li>
+        <li class="list-group-item">Book 4</li>
+        <li class="list-group-item">Book 5</li>
+      </ul>
+      
+      <p>Add books</p>
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+
+    <div class="col-md-3">
+      <p>Shows</p>
+      <ul class="list-group">
+        <li class="list-group-item">Show 1</li>
+        <li class="list-group-item">Show 2</li>
+        <li class="list-group-item">Show 3</li>
+        <li class="list-group-item">Show 4</li>
+        <li class="list-group-item">Show 5</li>
+      </ul>
+      
+      <p>Add shows</p>
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+
+    <div class="col-md-3">
+      <p>Movies</p>
+      <ul class="list-group">
+        <li class="list-group-item">Movie 1</li>
+        <li class="list-group-item">Movie 2</li>
+        <li class="list-group-item">Movie 3</li>
+        <li class="list-group-item">Movie 4</li>
+        <li class="list-group-item">Movie 5</li>
+      </ul>
+      
+      <p>Add movies</p>
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+
+    <div class="col-md-3">
+      <p>Games</p>
+      <ul class="list-group">
+        <li class="list-group-item">Game 1</li>
+        <li class="list-group-item">Game 2</li>
+        <li class="list-group-item">Game 3</li>
+        <li class="list-group-item">Game 4</li>
+        <li class="list-group-item">Game 5</li>
+      </ul>
+      
+      <p>Add movies</p>
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+
+    <p>
+      <h1>
+        <a href="MoreSuggestions.html" class="btn btn-primary btn-lg" role="button">
+          See suggestions
+        </a>
+      </h1>
+    </p>
+  {% else %}
+    <h1>Recommedia</h1>
+    <p>
+      Do you want to find out what books, shows, movies and games you will like? We make recommendations suited to your tastes!
+    </p>
+    <p>
+      <a href="TryItNow.html" class="btn btn-primary btn-lg" role="button">
+        Try it out now!
+      </a>
+    </p>
+    <p>
+      <a href="CreateAccount.html" class="btn btn-primary btn-lg" role="button">
+        Make an account
+      </a>
+    </p>
+  {% endif %}
 {% endblock %}
