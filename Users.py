@@ -6,8 +6,7 @@ class Users:
         self.client = MongoClient()
         self.db = self.client.database
         self.collection = self.db.userCollection
-        #self.userDoc = open("users.txt", "a")
-    
+
     def add_user(self, username, password, email):
         if email is None:
             email = ""
