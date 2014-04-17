@@ -18,6 +18,19 @@ def add_user(username, password, email):
     
 def find(user_id):
 	return collection.find_one({"_id": user_id})
+	
+def validate(username, password):
+	users = collection.find({"username": username, "password": password})
+	if users:
+		return True
+	else:
+		return False
+		
+def get_userID(username, password):
+	users = collection.find({"username": username, "password": password})
+	if users:
+		return users["_id"]
+		
     
 def add_favorite(user_id, favorite_id):
 	user = find(user_id)
