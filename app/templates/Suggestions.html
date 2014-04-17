@@ -47,9 +47,22 @@
     </ul>
   </div>
 
-  <p>
-    <a href="CreateAccount.html" class="btn btn-primary btn-lg" role="button">
-      Save results and make an account
-    </a>
-  </p>
+  {% if loggedIn %}
+    <p>
+      <h1>
+        <a href="Index.html" class="btn btn-primary btn-lg" role="button">
+          Go back and edit media
+        </a>
+      </h1>
+    </p>
+  {% else %}
+    <p>
+      <h1>
+        <a href="CreateAccount.html" class="btn btn-primary btn-lg" role="button">
+          Save results and make an account
+        </a>
+      </h1>
+    </p>
+  {% endif %}
+
 {% endblock %}
