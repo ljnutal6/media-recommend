@@ -14,7 +14,7 @@ class Users:
         
         user = {"username": username,
                 "password": password,
-                "email": email
+                "email": email,
                 "favorites": []}
         user_id = self.collection.insert(user)
         return user_id
