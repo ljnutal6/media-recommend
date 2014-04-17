@@ -1,5 +1,9 @@
 from flask import render_template
-from app import app
+from app import app, lm
+
+@lm.user_loader
+def load_user(userid):
+    return User.get(userid)
 
 #Index Routing
 @app.route('/')
@@ -7,7 +11,6 @@ from app import app
 @app.route('/Index.html')
 def index():
     return render_template("Index.html")
-
 
 #Try It Now routing
 @app.route('/TryItNow.html')
