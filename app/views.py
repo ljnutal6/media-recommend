@@ -6,7 +6,7 @@ from flask import render_template, redirect, url_for, request, flash
 from app import app, lm
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from forms import LoginForm, CreateAccountForm
-'''from user import User'''
+from user import User
 
 @lm.user_loader
 def load_user(userid):
