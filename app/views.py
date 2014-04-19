@@ -9,6 +9,9 @@ from forms import LoginForm, CreateAccountForm
 from user import User
 import re
 
+last_mine_time = time.time()
+last_mine_length = 0
+
 @lm.user_loader
 def load_user(userid):
     return User.get(userid)
@@ -26,6 +29,16 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
+@app.route("/mine234785974890")
+def mine_if_necessary():
+    global last_mine_time
+    global last_mine_length
+    start = time.time()
+    if start - last_mine_time > 10 * last_min_length:
+        dataMiner.dataMine()
+        last_mine_time = start
+        last_mine_length = time.time() - start
 
 #Index Routing
 @app.route('/')
@@ -131,7 +144,7 @@ def suggestions():
         return render_template("Suggestions.html", name=current_user.username, books=books, shows=shows, movies=movies, games=games)
     else:
         #create list of ID's
-        media_list = []
+        media_list = []         
         for book in filter(None, request.form.getlist("book")):
             media_list.append(getID(book, "book"))
         for show in filter(None, request.form.getlist("show")):
