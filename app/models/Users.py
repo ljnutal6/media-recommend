@@ -24,7 +24,11 @@ def validate(username, password):
 		
 def get_userID(username, password):
 	users = collection.find_one({"username": username, "password": password})
-	return users["_id"]		
+	return users["_id"]	
+	
+def get_userID(username):
+	users = collection.find_one({"username": username})
+	return users["_id"]
     
 def add_favorite(user_id, favorite_id):
 	user = find(user_id)
