@@ -12,7 +12,7 @@ from user import User
 def load_user(userid):
     return User.get(userid)
 
-@app.route("/login",  methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm(request.form)
     username = form.username.data
@@ -21,7 +21,7 @@ def login():
         login_user(User.get(username))
     return redirect(url_for("index"))
 
-@app.route("/logout")
+@app.route("/logout", methods=["GET", "POST"])
 def logout():
     logout_user()
     return redirect(url_for("index"))
