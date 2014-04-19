@@ -43,11 +43,11 @@ class User():
         return User(collection.find_one({"_id": user_id}))
       
     def validate(username, password):
-        users = collection.find({"username": username, "password": password})
-        if users:
-          return True
-        else:
-          return False
+    	users = collection.find({"username": username, "password": password}).count()
+    	if users == 1:
+		    return True
+	    else:
+    		return False
         
     def get_userID(username, password):
         users = collection.find({"username": username, "password": password})
