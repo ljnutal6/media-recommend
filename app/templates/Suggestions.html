@@ -46,7 +46,7 @@
         </a>
     </p>
   {% else %}
-    <form action="CreateAccount.html" method="GET">
+    <form action="CreateAccount.html" method="POST">
       {% for book in submittedBooks %}
         <input type="hidden" name="book" value="{{ book }}">
       {% endfor %}

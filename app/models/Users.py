@@ -5,13 +5,9 @@ client = MongoClient()
 db = client.database
 collection = db.userCollection
 
-def add_user(username, password, email):
-	if email is None:
-		email = ""
-        
+def add_user(username, password):
 	user = {"username": username,
 		"password": password,
-		"email": email,
 		"favorites": []}
 	user_id = collection.insert(user)
 	return user_id
