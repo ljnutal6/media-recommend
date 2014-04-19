@@ -1,7 +1,12 @@
+import sys
+sys.path.insert(0, 'app')
+sys.path.insert(0, 'app/models')
+
 from flask import render_template, redirect, url_for, request, flash
 from app import app, lm
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from forms import LoginForm
+from user import User
 
 @lm.user_loader
 def load_user(userid):
@@ -12,8 +17,8 @@ def login():
     form = LoginForm(request.form)
     username = form.username.data
     password = form.password.data
-    print username
-    print password
+    print(username)
+    print(password)
     flash("Logged in successfully.")
     return redirect(request.args.get("next") or url_for("index"))
     
@@ -41,9 +46,9 @@ def editMedia():
     return render_template("EditMedia.html")
 
 #Suggestions routing
-@app.route('/Suggestions.html')
+@app.route('/Suggestions.html',  methods=["GET", "POST"])
 def suggestions():
-    return render_template("Suggestions.html")
+    return render_template("Suggestions.html", submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
 
 #More Suggestions routing
 @app.route('/MoreSuggestions.html')
