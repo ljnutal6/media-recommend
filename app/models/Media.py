@@ -60,3 +60,9 @@ def getID(title, media_type):
     media = collection.find_one({"type": media_type, "title": title})
     return media["_id"]
     
+def getMediaIDs():
+    ids = []
+    for item in collection.find():
+    	ids.append(item["_id"])
+    return ids
+    

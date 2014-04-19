@@ -17,3 +17,9 @@ def find(rule_id):
 
 def remove_all():
   collection.remove({})
+  
+def getRules():
+	ruleset = []
+	for item in collection.find():
+		ruleset.append((item["lhs"], item["rhs"], item["confidence"]))
+	return ruleset
