@@ -6,7 +6,8 @@ db = client.database
 collection = db.mediaCollection
     
 def add_book(title, authors, editors, illustrators, translators, publication):
-    book = {"title": title,
+    book = {"type": "book", 
+            "title": title,
             "authors": authors,
             "editors": editors,
             "illustrators": illustrators,
@@ -20,7 +21,8 @@ def add_book(title, authors, editors, illustrators, translators, publication):
     return book_id
         
 def add_movie(title, release, rating, studio, director, actors):
-    movie = {"title": title,
+    movie = {"type": "movie", 
+             "title": title,
              "release year": release,
              "MPAA rating": rating,
              "studio": studio,
@@ -30,7 +32,8 @@ def add_movie(title, release, rating, studio, director, actors):
     return movie_id
     
 def add_tvshow(title, producer, seasons, episodes, actors, premier):
-    tvshow = {"title": title,
+    tvshow = {"type": "tv show", 
+              "title": title,
               "producer": producer,
               "number of seasons": seasons,
               "number of episodes": episodes,
@@ -40,7 +43,8 @@ def add_tvshow(title, producer, seasons, episodes, actors, premier):
     return tvshow_id
     
 def add_videogame(title, publisher, system, release, rating):
-    videogame = {"title": title,
+    videogame = {"type": "videogame", 
+                 "title": title,
                  "publisher": publisher,
                  "developer": developer,
                  "system": system,
