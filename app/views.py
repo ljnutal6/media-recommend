@@ -17,23 +17,26 @@ def login():
     form = LoginForm(request.form)
     username = form.username.data
     password = form.password.data
-    print(username)
-    print(password)
-    flash("Logged in successfully.")
-    return redirect(request.args.get("next") or url_for("index"))
-    
+    if User.validate(username, password):
+        login_user(User.get(username))
+    return redirect(url_for("index"))
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("index"))
 
 #Index Routing
 @app.route('/')
 @app.route('/index.html')
 @app.route('/Index.html')
 def index():
-    return render_template("Index.html")
+    return render_template("Index.html", name=current_user.get_id())
 
 #Try It Now routing
 @app.route('/TryItNow.html')
 def tryItNow():
-    return render_template("TryItNow.html")
+    return render_template("TryItNow.html", name=current_user.get_id())
 
 #Create Account routing
 @app.route('/CreateAccount.html', methods=["GET","POST"])
@@ -43,22 +46,14 @@ def createAccount():
     password = form.password.data
     print(username)
     print(password)
+    if current_user.get_id():
+        return redirect(url_for("index"))
     return render_template("CreateAccount.html")
-
-#Edit Media routing
-@app.route('/EditMedia.html')
-def editMedia():
-    return render_template("EditMedia.html")
 
 #Suggestions routing
 @app.route('/Suggestions.html',  methods=["GET", "POST"])
 def suggestions():
-    return render_template("Suggestions.html", submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
-
-#More Suggestions routing
-@app.route('/MoreSuggestions.html')
-def moreSuggestions():
-    return render_template("MoreSuggestions.html")
+    return render_template("Suggestions.html", name=current_user.get_id(), submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
 
 
 
