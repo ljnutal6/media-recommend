@@ -66,3 +66,6 @@ def getMediaIDs():
     	ids.append(item["_id"])
     return ids
     
+def isType(media_id, media_type):
+	media = find(media_id)
+	return media["type"] == media_type
