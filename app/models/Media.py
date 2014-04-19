@@ -53,5 +53,10 @@ def add_videogame(title, publisher, system, release, rating):
     game_id = collection.insert(videogame)
     return game_id
     
-def find(id):
-    return collection.find_one({"_id": id})
+def find(media_id):
+    return collection.find_one({"_id": media_id})
+    
+def getID(title, media_type):
+    media = collection.find_one({"type": media_type, "title": title})
+    return media["_id"]
+    
