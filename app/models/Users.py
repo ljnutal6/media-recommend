@@ -43,3 +43,8 @@ def getUserIDs():
 	for item in collection.find():
 		ids.append(item["_id"])
 	return ids
+
+def userLikes(user_id, media_id):
+	user = get(user_id)
+	likes = user["favorites"]
+	return media_id in likes
