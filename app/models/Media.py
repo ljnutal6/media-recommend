@@ -58,7 +58,17 @@ def find(media_id):
     
 def getID(title, media_type):
     media = collection.find_one({"type": media_type, "title": title})
-    return media["_id"]
+    if media is None:
+        if media_type == "book":
+            return add_book(title, "", "", "", "", "")
+        elif media_type == "videogame":
+            return add_videogame(title, "", "", "", "", "")
+        elif media_type == "movie":
+            return add_movie(title, "", "", "", "", "")
+        else:
+            return add_tvshow(title, "", "", "", "", "")
+    else:
+        return media["_id"]
     
 def getMediaIDs():
     ids = []
