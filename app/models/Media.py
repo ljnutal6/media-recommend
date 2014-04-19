@@ -42,7 +42,7 @@ def add_tvshow(title, producer, seasons, episodes, actors, premier):
     tvshow_id = collection.insert(tvshow)
     return tvshow_id
     
-def add_videogame(title, publisher, system, release, rating):
+def add_videogame(title, publisher, developer, system, release, rating):
     videogame = {"type": "videogame", 
                  "title": title,
                  "publisher": publisher,
