@@ -15,4 +15,22 @@ def recommend(user):
 			applicable = False
 		if applicable:
 			recommendations.append(rule[1])
-	print str(recommendations)
+	return recommendations
+
+def recommend_anon(mediaIDs):
+	rules = Rule.getRules()
+	rules = sorted(rules, key=lambda x: x[2], reverse=True)
+	recommendations = []
+	for rule in rules:
+		preconditions = rule[0]
+		applicable = True
+		for cond in preconditions:
+			if not cond in mediaIDs:
+				applicable = False
+		if rule[1] in mediaIDs:
+			applicable = False
+		if applicable:
+			recommendations.append(rule[1])
+	return recommendations
+
+#recommend(4)
