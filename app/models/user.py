@@ -9,7 +9,6 @@ class User():
     def __init__(self, record):
         self.username = record.username
         self.password = record.password
-        self.email = record.email
         self.favorites = record.favorites
     
     def get_id(self):
@@ -21,20 +20,16 @@ class User():
     def is_active(self):
         return True
         
-    def is_anonymouse(self):
+    def is_anonymous(self):
         return False
         
     def save(self):
         collection.update({"username":self.username},{"$set":{"favorites",favorites}})
     
     #Static methods
-    def add_user(username, password, email):
-        if email is None:
-          email = ""
-              
-        user = {"username": username,
+    def add_user(username, password):
+       user = {"username": username,
           "password": password,
-          "email": email,
           "favorites": []}
         user_id = collection.insert(user)
         return user_id
