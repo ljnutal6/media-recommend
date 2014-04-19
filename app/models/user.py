@@ -49,10 +49,9 @@ class User():
 	    else:
     		return False
         
-    def get_userID(username, password):
-        users = collection.find({"username": username, "password": password})
-        if users:
-          return users["_id"]
+   def get_userID(username, password):
+	users = collection.find_one({"username": username, "password": password})
+	return users["_id"]
         
     def add_favorite(user_id, favorite_id):
         user = find(user_id)
