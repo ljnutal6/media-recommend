@@ -32,21 +32,46 @@ def logout():
 @app.route('/index.html')
 @app.route('/Index.html')
 def index():
-    return render_template("Index.html", name=current_user.get_id())
+    if current_user.get_id():
+        books = []
+        shows = []
+        movies = []
+        games = []
+        for ID in User.get(current_user.get_id())["favorites"]:
+            media = find(ID)
+            if media["type"] == "book":
+                books.append(media["title"])
+            if media["type"] == "tv show":
+                shows.append(media["title"])
+            if media["type"] == "movie":
+                movies.append(media["title"])
+            if media["type"] == "videogame":
+                games.append(media["title"])
+        return render_template("Index.html", name=current_user.username, books=books, shows=shows, movies=movies, games=games)
+    return render_template("Index.html", name=None)
 
 #Try It Now routing
 @app.route('/TryItNow.html')
 def tryItNow():
-    return render_template("TryItNow.html", name=current_user.get_id())
+    if current_user.get_id():
+        return redirect(url_for("index"))
+    return render_template("TryItNow.html", name=None)
 
 @app.route('/DoneWithAccount', methods=["GET","POST"])
 def doneWithAccount():
     username = request.form["username"]
     password = request.form["password"]
     if (re.match("^[A-Za-z0-9_-]+$", username) and re.match("^[A-Za-z0-9_-]+$", password)):
-        #add_user(username, password)
-        #We'll have to add favorites here
+        add_user(username, password)
         login_user(User.get(username))
+        for book in filter(None, request.form.getlist("book")):
+            add_favorite(get_userID(username, password), getID(book, "book"))
+        for show in filter(None, request.form.getlist("show")):
+            add_favorite(get_userID(username, password), getID(book, "tv show"))
+        for movie in filter(None, request.form.getlist("movie")):
+            add_favorite(get_userID(username, password), getID(book, "movie"))
+        for game in filter(None, request.form.getlist("game")):
+            add_favorite(get_userID(username, password), getID(book, "videogame"))
         return redirect(url_for("index"))
     return render_template("CreateAccount.html", books=filter(None, request.form.getlist("book")), shows=filter(None, request.form.getlist("show")), movies=filter(None, request.form.getlist("movie")), games=filter(None, request.form.getlist("game")))
 
@@ -79,14 +104,14 @@ def suggestions():
         movies = get_movies(current_user.favorites)
         games = get_games(current_user.favorites)
 
-        return render_template("Suggestions.html", name=current_user.get_id(), books=books, shows=shows, movies=movies, games=games)
+        return render_template("Suggestions.html", name=current_user.username, books=books, shows=shows, movies=movies, games=games)
     else:
         books = get_books(current_user.favorites)
         shows = get_shows(current_user.favorites)
         movies = get_movies(current_user.favorites)
         games = get_games(current_user.favorites)
 
-        return render_template("Suggestions.html", name=current_user.get_id(), submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
+        return render_template("Suggestions.html", name=None, books=books, shows=shows, movies=movies, games=games, submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
 
 
 

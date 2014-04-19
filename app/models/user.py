@@ -8,14 +8,13 @@ class User():
     
     def __init__(self, record=None):
         if record:
+            self._id = record["_id"]
             self.username = record["username"]
             self.password = record["password"]
             self.favorites = record["favorites"]
-        else:
-            self.favorites = []
     
     def get_id(self):
-        return self.username
+        return self._id
         
     def is_authenticated(self):
         return True
@@ -25,18 +24,6 @@ class User():
         
     def is_anonymous(self):
         return False
-        
-    def save(self):
-        collection.update({"username":self.username},{"$set":{"favorites",self.favorites}})
-
-    def add_books(books):
-        return
-    def add_shows(books):
-        return
-    def add_movies(books):
-        return
-    def add_games(books):
-        return
     
     #Static methods
     @staticmethod
@@ -47,9 +34,9 @@ class User():
         user_id = collection.insert(user)
         return user_id
     @staticmethod        
-    def get(user_id):
-        return User({"username":user_id, "password":"abc", "favorites":[]})
-        #return User(collection.find_one({"_id": user_id}))
+    def get(username):
+        return User({"username":username, "password":"abc", "favorites":[]})
+        #return User(collection.find_one({"username": username}))
     @staticmethod      
     def validate(username, password):
         return True
