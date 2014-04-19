@@ -53,6 +53,7 @@ def editMedia():
 #Suggestions routing
 @app.route('/Suggestions.html',  methods=["GET", "POST"])
 def suggestions():
+
     return render_template("Suggestions.html", submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
 
 #More Suggestions routing
