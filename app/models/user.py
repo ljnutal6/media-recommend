@@ -12,7 +12,7 @@ class User():
         self.favorites = record.favorites
     
     def get_id(self):
-        return _id
+        return self.username
         
     def is_authenticated(self):
         return True
@@ -24,7 +24,7 @@ class User():
         return False
         
     def save(self):
-        collection.update({"username":self.username},{"$set":{"favorites",favorites}})
+        collection.update({"username":self.username},{"$set":{"favorites",self.favorites}})
     
     #Static methods
     def add_user(username, password):
