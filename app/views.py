@@ -5,8 +5,8 @@ sys.path.insert(0, 'app/models')
 from flask import render_template, redirect, url_for, request, flash
 from app import app, lm
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
-from forms import LoginForm
-from user import User
+from forms import LoginForm, CreateAccountForm
+'''from user import User'''
 
 @lm.user_loader
 def load_user(userid):
@@ -36,8 +36,13 @@ def tryItNow():
     return render_template("TryItNow.html")
 
 #Create Account routing
-@app.route('/CreateAccount.html')
+@app.route('/CreateAccount.html', methods=["GET","POST"])
 def createAccount():
+    form = CreateAccountForm(request.form)
+    username = form.username.data
+    password = form.password.data
+    print(username)
+    print(password)
     return render_template("CreateAccount.html")
 
 #Edit Media routing
