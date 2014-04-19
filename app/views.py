@@ -92,24 +92,74 @@ def createAccount():
 #Suggestions routing
 @app.route('/Suggestions.html',  methods=["GET", "POST"])
 def suggestions():
-    if current_user.get_id():
-        current_user.add_books(filter(None, request.form.getlist("book")))
-        current_user.add_shows(filter(None, request.form.getlist("show")))
-        current_user.add_movies(filter(None, request.form.getlist("movie")))
-        current_user.add_games(filter(None, request.form.getlist("game")))
-        current_user.save()
 
-        books = get_books(current_user.favorites)
-        shows = get_shows(current_user.favorites)
-        movies = get_movies(current_user.favorites)
-        games = get_games(current_user.favorites)
+    books = []
+    shows = []
+    movies = []
+    games = []
+
+    if current_user.get_id():
+        for book in filter(None, request.form.getlist("book")):
+            add_favorite(get_userID(username, password), getID(book, "book"))
+        for show in filter(None, request.form.getlist("show")):
+            add_favorite(get_userID(username, password), getID(book, "tv show"))
+        for movie in filter(None, request.form.getlist("movie")):
+            add_favorite(get_userID(username, password), getID(book, "movie"))
+        for game in filter(None, request.form.getlist("game")):
+            add_favorite(get_userID(username, password), getID(book, "videogame"))
+
+        recBooks = recommend_by_type(current_user._id, "book")        
+        for ID in recBooks:
+            book = find(ID)
+            books.append(book["title"])
+
+        recShows = recommend_by_type(current_user._id, "tv show")        
+        for ID in recShows:
+            show = find(ID)
+            shows.append(show["title"])
+
+        recMovies = recommend_by_type(current_user._id, "movie")        
+        for ID in recMovies:
+            movie = find(ID)
+            movies.append(movie["title"])
+
+        recGames = recommend_by_type(current_user._id, "videogame")        
+        for ID in recGames:
+            game = find(ID)
+            games.append(game["title"])
 
         return render_template("Suggestions.html", name=current_user.username, books=books, shows=shows, movies=movies, games=games)
     else:
-        books = get_books(current_user.favorites)
-        shows = get_shows(current_user.favorites)
-        movies = get_movies(current_user.favorites)
-        games = get_games(current_user.favorites)
+        #create list of ID's
+        media_list = []
+        for book in filter(None, request.form.getlist("book")):
+            media_list.append(getID(book, "book"))
+        for show in filter(None, request.form.getlist("show")):
+            media_list.append(getID(book, "tv show"))
+        for movie in filter(None, request.form.getlist("movie")):
+            media_list.append(getID(book, "movie"))
+        for game in filter(None, request.form.getlist("game")):
+            media_list.append(getID(book, "videogame"))
+
+        recBooks = recommend_anon_by_type(media_list, "book")        
+        for ID in recBooks:
+            book = find(ID)
+            books.append(book["title"])
+
+        recShows = recommend_anon_by_type(media_list, "tv show")        
+        for ID in recShows:
+            show = find(ID)
+            shows.append(show["title"])
+
+        recMovies = recommend_anon_by_type(media_list, "movie")        
+        for ID in recMovies:
+            movie = find(ID)
+            movies.append(movie["title"])
+
+        recGames = recommend_anon_by_type(media_list, "videogame")  
+        for ID in recGames:
+            game = find(ID)
+            games.append(game["title"])
 
         return render_template("Suggestions.html", name=None, books=books, shows=shows, movies=movies, games=games, submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
 
