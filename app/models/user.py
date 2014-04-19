@@ -6,10 +6,13 @@ class User():
     #db = client.database
     #collection = db.userCollection
     
-    def __init__(self, record):
-        self.username = record["username"]
-        self.password = record["password"]
-        self.favorites = record["favorites"]
+    def __init__(self, record=None):
+        if record:
+            self.username = record["username"]
+            self.password = record["password"]
+            self.favorites = record["favorites"]
+        else:
+            self.favorites = []
     
     def get_id(self):
         return self.username
@@ -25,6 +28,15 @@ class User():
         
     def save(self):
         collection.update({"username":self.username},{"$set":{"favorites",self.favorites}})
+
+    def add_books(books):
+        return
+    def add_shows(books):
+        return
+    def add_movies(books):
+        return
+    def add_games(books):
+        return
     
     #Static methods
     @staticmethod
@@ -40,7 +52,7 @@ class User():
         #return User(collection.find_one({"_id": user_id}))
     @staticmethod      
     def validate(username, password):
-        return True        
+        return True
         #users = collection.find({"username": username, "password": password}).count()
         #if users == 1:
 		    #    return True
