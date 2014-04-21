@@ -7,13 +7,15 @@ from flask import render_template, redirect, url_for, request, flash
 from app import app, lm
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from forms import LoginForm, CreateAccountForm
-from user import User
+#from user import User
 import re
 import time
-from recommender import *
-from Rule import *
-from Users import *
-from Media import *
+import urllib2
+import simplejson
+#from recommender import *
+#from Rule import *
+#from Users import *
+#from Media import *
 
 last_mine_time = time.time()
 last_mine_length = 0
@@ -70,7 +72,22 @@ def index():
             if media["type"] == "videogame":
                 games.append(media["title"])
         return render_template("Index.html", name=current_user.username, books=books, shows=shows, movies=movies, games=games)
-    return render_template("Index.html", name=None)
+    url = ('https://ajax.googleapis.com/ajax/services/search/images?' 
+    +'v=1.0&q=barack%20obama')
+
+    request = urllib2.Request(url, None, {'Referer': "http://localhost:5000/"})
+    response = urllib2.urlopen(request)
+
+    # Process the JSON string.
+    results = simplejson.load(response)
+	
+    data = results['responseData']
+    dataInfo = data['results']
+    imageObject = dataInfo[0]
+    imageUrl = imageObject['unescapedUrl']    
+    print imageUrl
+
+    return render_template("Index.html", name=None, imageName=imageUrl)
 
 #Try It Now routing
 @app.route('/TryItNow.html')

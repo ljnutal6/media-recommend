@@ -91,6 +91,5 @@
         Make an account
       </a>
     </p>
-    <img src={{imageName}} width="50px" height="50px">
   {% endif %}
 {% endblock %}
