@@ -9,21 +9,25 @@ from flask.ext.login import LoginManager, login_user, logout_user, current_user,
 from forms import LoginForm, CreateAccountForm
 from user import User
 import re
+import time
+import recommender
+import Rule
+import Users
 
 last_mine_time = time.time()
 last_mine_length = 0
 
 @lm.user_loader
 def load_user(userid):
-    return User.get(userid)
+    return get(userid)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm(request.form)
     username = form.username.data
     password = form.password.data
-    if User.validate(username, password):
-        login_user(User.get(username))
+    if validate(username, password):
+        login_user(User(get_by_username(username)))
     return redirect(url_for("index"))
 
 @app.route("/logout", methods=["GET", "POST"])
@@ -36,7 +40,7 @@ def mine_if_necessary():
     global last_mine_time
     global last_mine_length
     start = time.time()
-    if start - last_mine_time > 10 * last_min_length:
+    if start - last_mine_time > 10 * last_mine_length:
         dataMiner.dataMine()
         last_mine_time = start
         last_mine_length = time.time() - start
@@ -51,7 +55,7 @@ def index():
         shows = []
         movies = []
         games = []
-        for ID in User.get(current_user.get_id())["favorites"]:
+        for ID in get(current_user.get_id())["favorites"]:
             media = find(ID)
             if media["type"] == "book":
                 books.append(media["title"])
@@ -75,9 +79,9 @@ def tryItNow():
 def doneWithAccount():
     username = request.form["username"]
     password = request.form["password"]
-    if (re.match("^[A-Za-z0-9_-]+$", username) and re.match("^[A-Za-z0-9_-]+$", password)):
+    if (get_by_username(username) == None and re.match("^[A-Za-z0-9_-]+$", username) and re.match("^[A-Za-z0-9_-]+$", password)):
         add_user(username, password)
-        login_user(User.get(username))
+        login_user(User(get_by_username(username)))
         for book in filter(None, request.form.getlist("book")):
             add_favorite(get_userID(username, password), getID(book, "book"))
         for show in filter(None, request.form.getlist("show")):

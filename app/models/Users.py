@@ -14,6 +14,9 @@ def add_user(username, password):
     
 def get(user_id):
 	return collection.find_one({"_id": user_id})
+
+def get_by_username(username):
+	return collection.find_one({"username": username})
 	
 def validate(username, password):
    	users = collection.find({"username": username, "password": password}).count()
