@@ -8,6 +8,7 @@ collection = db.mediaCollection
 def add_book(title, authors, editors, illustrators, translators, publication):
     book = {"type": "book", 
             "title": title,
+            "searchable title": title.lower(), 
             "authors": authors,
             "editors": editors,
             "illustrators": illustrators,
@@ -23,6 +24,7 @@ def add_book(title, authors, editors, illustrators, translators, publication):
 def add_movie(title, release, rating, studio, director, actors):
     movie = {"type": "movie", 
              "title": title,
+             "searchable title": title.lower(),
              "release year": release,
              "MPAA rating": rating,
              "studio": studio,
@@ -34,6 +36,7 @@ def add_movie(title, release, rating, studio, director, actors):
 def add_tvshow(title, producer, seasons, episodes, actors, premier):
     tvshow = {"type": "tv show", 
               "title": title,
+              "searchable title": title.lower(),
               "producer": producer,
               "number of seasons": seasons,
               "number of episodes": episodes,
@@ -45,6 +48,7 @@ def add_tvshow(title, producer, seasons, episodes, actors, premier):
 def add_videogame(title, publisher, developer, system, release, rating):
     videogame = {"type": "videogame", 
                  "title": title,
+                 "searchable title": title.lower(),
                  "publisher": publisher,
                  "developer": developer,
                  "system": system,
@@ -60,13 +64,13 @@ def getID(title, media_type):
     media = collection.find_one({"type": media_type, "title": title})
     if media is None:
         if media_type == "book":
-            return add_book(title, "", "", "", "", "")
+            return add_book(title, "", "", "", "", "", "")
         elif media_type == "videogame":
-            return add_videogame(title, "", "", "", "", "")
+            return add_videogame(title, "", "", "", "", "", "")
         elif media_type == "movie":
-            return add_movie(title, "", "", "", "", "")
+            return add_movie(title, "", "", "", "", "", "")
         else:
-            return add_tvshow(title, "", "", "", "", "")
+            return add_tvshow(title, "", "", "", "", "", "")
     else:
         return media["_id"]
     
@@ -86,4 +90,4 @@ def update(media_id, field, newValue):
 	collection.save(media)
 	
 def search_byphrase(phrase):
-	return find( { "$text": { "$search": "\"" + phrase + "\"" } } )
+	return find( { "$text": { "$search": "\"" + phrase.lower() + "\"" } } )
