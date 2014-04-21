@@ -80,5 +80,10 @@ def isType(media_id, media_type):
 	media = find(media_id)
 	return media["type"] == media_type
 	
+def update(media_id, field, newValue):
+	media = find(media_id)
+	media[field] = newValue
+	collection.save(media)
+	
 def search_byphrase(phrase):
 	return find( { "$text": { "$search": "\"" + phrase + "\"" } } )
