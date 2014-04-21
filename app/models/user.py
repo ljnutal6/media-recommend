@@ -6,7 +6,7 @@ class User():
         self.favorites = record["favorites"]
 
     def get_id(self):
-        return self._id
+        return str(self.username)
         
     def is_authenticated(self):
         return True

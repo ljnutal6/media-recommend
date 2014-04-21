@@ -19,7 +19,7 @@ def get_by_username(username):
 	return collection.find_one({"username": username})
 	
 def validate(username, password):
-   	users = collection.find({"username": username, "password": password}).count()
+	users = collection.find({"username": username, "password": password}).count()
 	if users == 1:
 		return True
 	else:
@@ -34,12 +34,12 @@ def get_userID(username):
 	return users["_id"]
     
 def add_favorite(user_id, favorite_id):
-	user = find(user_id)
+	user = collection.find_one({"_id":user_id})
 	user["favorites"].append(favorite_id)
 	collection.save(user)
     
 def remove_favorite(user_id, favorite_id):
-	user = find(user_id)
+	user = collection.find_one({"_id":user_id})
 	favorites = user["favorites"]
 	if favorite_id in favorites: 
 		favorites.remove(favorite_id)

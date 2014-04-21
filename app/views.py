@@ -1,7 +1,7 @@
 import sys
 import time
-sys.path.insert(0, 'app')
-sys.path.insert(0, 'app/models')
+sys.path.append('app')
+sys.path.append('app/models')
 
 from flask import render_template, redirect, url_for, request, flash
 from app import app, lm
@@ -10,16 +10,17 @@ from forms import LoginForm, CreateAccountForm
 from user import User
 import re
 import time
-import recommender
-import Rule
-import Users
+from recommender import *
+from Rule import *
+from Users import *
+from Media import *
 
 last_mine_time = time.time()
 last_mine_length = 0
 
 @lm.user_loader
-def load_user(userid):
-    return get(userid)
+def load_user(username):
+    return User(get_by_username(username))
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -27,6 +28,7 @@ def login():
     username = form.username.data
     password = form.password.data
     if validate(username, password):
+        print(get_by_username(username))
         login_user(User(get_by_username(username)))
     return redirect(url_for("index"))
 
@@ -50,12 +52,14 @@ def mine_if_necessary():
 @app.route('/index.html')
 @app.route('/Index.html')
 def index():
+    #logout_user()
+    print(current_user)
     if current_user.get_id():
         books = []
         shows = []
         movies = []
         games = []
-        for ID in get(current_user.get_id())["favorites"]:
+        for ID in get(current_user._id)["favorites"]:
             media = find(ID)
             if media["type"] == "book":
                 books.append(media["title"])
@@ -83,13 +87,13 @@ def doneWithAccount():
         add_user(username, password)
         login_user(User(get_by_username(username)))
         for book in filter(None, request.form.getlist("book")):
-            add_favorite(get_userID(username, password), getID(book, "book"))
+            add_favorite(get_userID(username), getID(book, "book"))
         for show in filter(None, request.form.getlist("show")):
-            add_favorite(get_userID(username, password), getID(book, "tv show"))
+            add_favorite(get_userID(username), getID(show, "tv show"))
         for movie in filter(None, request.form.getlist("movie")):
-            add_favorite(get_userID(username, password), getID(book, "movie"))
+            add_favorite(get_userID(username), getID(movie, "movie"))
         for game in filter(None, request.form.getlist("game")):
-            add_favorite(get_userID(username, password), getID(book, "videogame"))
+            add_favorite(get_userID(username), getID(game, "videogame"))
         return redirect(url_for("index"))
     return render_template("CreateAccount.html", books=filter(None, request.form.getlist("book")), shows=filter(None, request.form.getlist("show")), movies=filter(None, request.form.getlist("movie")), games=filter(None, request.form.getlist("game")))
 
@@ -118,13 +122,13 @@ def suggestions():
 
     if current_user.get_id():
         for book in filter(None, request.form.getlist("book")):
-            add_favorite(get_userID(username, password), getID(book, "book"))
+            add_favorite(current_user._id, getID(book, "book"))
         for show in filter(None, request.form.getlist("show")):
-            add_favorite(get_userID(username, password), getID(book, "tv show"))
+            add_favorite(current_user._id, getID(show, "tv show"))
         for movie in filter(None, request.form.getlist("movie")):
-            add_favorite(get_userID(username, password), getID(book, "movie"))
+            add_favorite(current_user._id, getID(movie, "movie"))
         for game in filter(None, request.form.getlist("game")):
-            add_favorite(get_userID(username, password), getID(book, "videogame"))
+            add_favorite(current_user._id, getID(game, "videogame"))
 
         recBooks = recommend_by_type(current_user._id, "book")        
         for ID in recBooks:
@@ -153,11 +157,11 @@ def suggestions():
         for book in filter(None, request.form.getlist("book")):
             media_list.append(getID(book, "book"))
         for show in filter(None, request.form.getlist("show")):
-            media_list.append(getID(book, "tv show"))
+            media_list.append(getID(show, "tv show"))
         for movie in filter(None, request.form.getlist("movie")):
-            media_list.append(getID(book, "movie"))
+            media_list.append(getID(movie, "movie"))
         for game in filter(None, request.form.getlist("game")):
-            media_list.append(getID(book, "videogame"))
+            media_list.append(getID(game, "videogame"))
 
         recBooks = recommend_anon_by_type(media_list, "book")        
         for ID in recBooks:

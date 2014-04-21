@@ -80,5 +80,5 @@ def isType(media_id, media_type):
 	media = find(media_id)
 	return media["type"] == media_type
 	
-def search_byphrase(phrase)
-    	return find( { $text: { $search: "\"" + phrase + "\"" } } )
+def search_byphrase(phrase):
+	return find( { "$text": { "$search": "\"" + phrase + "\"" } } )
