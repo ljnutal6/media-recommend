@@ -49,6 +49,10 @@
         {% block content %}
         {% endblock %}
       </div>
+      <div class="jumbotron">
+        <footer>
+        </footer>
+      </div>
     </div>
     
 

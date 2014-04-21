@@ -49,4 +49,7 @@
     </p>
   <form>
 {% endblock %}
+{% block content2 %}
+  <p> Hello! </p>
+{% endblock %}
 

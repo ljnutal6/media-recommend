@@ -21,11 +21,11 @@
     {% endfor %}
 
     <p>
-      Username: <input type="text" name="username">
+      Username: <input type="text" align="right" name="username">
     </p>
 
     <p>
-      Password: <input type="password" name="password">
+      Password: <input type="password" align="right" name="password">
     </p>
 
     <p>
