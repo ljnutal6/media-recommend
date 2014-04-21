@@ -1,5 +1,6 @@
 import Rule
 import Users
+import Media
 
 def recommend(user):
 	rules = Rule.getRules()
