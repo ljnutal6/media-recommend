@@ -6,8 +6,8 @@ import Rule
 #Arbitrary parameters. Can be adjusted up or down to more or fewer rules that are less impressive.
 # Value of 1 is so picky that it rejects every rule that isn't supported by every dataset
 # Value of 0 is so permissive that it finds every association that occurs even once.
-minSupport = 0.26
-minConf = 0.3
+minSupport = 0.05
+minConf = 0.1
 
 def frequentItemSets():
 	itemSets = []
