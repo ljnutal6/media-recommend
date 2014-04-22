@@ -10,7 +10,7 @@ from forms import LoginForm, CreateAccountForm
 from user import User
 import re
 import time
-import urllib2
+import urllib.request as urllib2
 import simplejson
 import dataMiner
 from recommender import *
@@ -87,7 +87,7 @@ def index():
     dataInfo = data['results']
     imageObject = dataInfo[0]
     imageUrl = imageObject['unescapedUrl']    
-    print imageUrl
+    print(imageUrl)
 
     return render_template("Index.html", name=None, imageName=imageUrl)
 
@@ -239,7 +239,7 @@ def getImageUrl(bookSearch):
     dataInfo = data['results']
     imageObject = dataInfo[0]
     imageUrl = imageObject['unescapedUrl']    
-    print imageUrl
+    print(imageUrl)
     return imageUrl
 
 
