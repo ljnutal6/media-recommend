@@ -223,7 +223,7 @@ def suggestions():
             gameSearch = "game " + movie["title"]
             gameUrls.append(getImageUrl(gameSearch))
 
-        return render_template("Suggestions.html", name=None, books=books, shows=shows, movies=movies, games=games, submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
+        return render_template("Suggestions.html", name=None, books=books, bookUrls=bookUrls, shows=shows, showUrls=showUrls, movies=movies, movieUrls=movieUrls, games=games, gameUrls=gameUrls, submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
 
 def getImageUrl(bookSearch):
     url = ('https://ajax.googleapis.com/ajax/services/search/images?' 
