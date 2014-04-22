@@ -137,11 +137,6 @@ def suggestions():
     movies = []
     games = []
 
-    bookUrls = []  
-    showUrls = []
-    movieUrls = []
-    gameUrls = []
-
     if current_user.get_id():
         for book in filter(None, request.form.getlist("book")):
             add_favorite(current_user._id, getID(book, "book"))
@@ -158,31 +153,35 @@ def suggestions():
             book = find(ID)
             books.append(book["title"])
             bookSearch = "book " + book["title"]
-            bookUrls.append(getImageUrl(bookSearch))
+            url = ('https://ajax.googleapis.com/ajax/services/search/images?' 
+            +'v=1.0&q=' + bookSearch)
+            imageRequest = urllib2.Request(url, None, {'Referer': "http://localhost:5000/"})
+            response = urllib2.urlopen(imageRequest)
+            # Process the JSON string.
+            results = simplejson.load(response)
+            data = results['responseData']
+            dataInfo = data['results']
+            imageObject = dataInfo[0]
+            imageUrl = imageObject['unescapedUrl']    
+            print imageUrl
+            bookUrls.append(imageUrl)
 
         recShows = recommend_by_type(current_user._id, "tv show")        
         for ID in recShows:
             show = find(ID)
             shows.append(show["title"])
-            showSearch = "show " + show["title"]
-            showUrls.append(getImageUrl(showSearch))
 
         recMovies = recommend_by_type(current_user._id, "movie")        
         for ID in recMovies:
             movie = find(ID)
             movies.append(movie["title"])
-            movieSearch = "movie " + movie["title"]
-            movieUrls.append(getImageUrl(movieSearch))
 
         recGames = recommend_by_type(current_user._id, "videogame")        
         for ID in recGames:
             game = find(ID)
             games.append(game["title"])
-            gameSearch = "game " + movie["title"]
-            gameUrls.append(getImageUrl(gameSearch))
 
-
-        return render_template("Suggestions.html", name=current_user.username, books=books, bookUrls=bookUrls, shows=shows, showUrls=showUrls, movies=movies, movieUrls=movieUrls, games=games, gameUrls=gameUrls)
+        return render_template("Suggestions.html", name=current_user.username, books=books, bookUrls=bookUrls, shows=shows, movies=movies, games=games)
     else:
         #create list of ID's
         media_list = []         
@@ -199,44 +198,24 @@ def suggestions():
         for ID in recBooks:
             book = find(ID)
             books.append(book["title"])
-            bookSearch = "book " + book["title"]
-            bookUrls.append(getImageUrl(bookSearch))
 
         recShows = recommend_anon_by_type(media_list, "tv show")        
         for ID in recShows:
             show = find(ID)
             shows.append(show["title"])
-            showSearch = "show " + show["title"]
-            showUrls.append(getImageUrl(showSearch))
 
         recMovies = recommend_anon_by_type(media_list, "movie")        
         for ID in recMovies:
             movie = find(ID)
             movies.append(movie["title"])
-            movieSearch = "movie " + movie["title"]
-            movieUrls.append(getImageUrl(movieSearch))
 
         recGames = recommend_anon_by_type(media_list, "videogame")  
         for ID in recGames:
             game = find(ID)
             games.append(game["title"])
-            gameSearch = "game " + movie["title"]
-            gameUrls.append(getImageUrl(gameSearch))
 
         return render_template("Suggestions.html", name=None, books=books, shows=shows, movies=movies, games=games, submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
 
-def getImageUrl(bookSearch):
-    url = ('https://ajax.googleapis.com/ajax/services/search/images?' 
-    +'v=1.0&q=' + bookSearch)
-    imageRequest = urllib2.Request(url, None, {'Referer': "http://localhost:5000/"})
-    response = urllib2.urlopen(imageRequest)
-    # Process the JSON string.
-    results = simplejson.load(response)
-    data = results['responseData']
-    dataInfo = data['results']
-    imageObject = dataInfo[0]
-    imageUrl = imageObject['unescapedUrl']    
-    print imageUrl
-    return imageUrl
+
 
 
