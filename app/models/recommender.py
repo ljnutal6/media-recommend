@@ -14,6 +14,8 @@ def recommend(user):
 				applicable = False
 		if Users.userLikes(user, rule[1]):
 			applicable = False
+		if rule[1] in recommendations:
+			applicable = False
 		if applicable:
 			recommendations.append(rule[1])
 	return recommendations
@@ -29,6 +31,8 @@ def recommend_anon(mediaIDs):
 			if not cond in mediaIDs:
 				applicable = False
 		if rule[1] in mediaIDs:
+			applicable = False
+		if rule[1] in recommendations:
 			applicable = False
 		if applicable:
 			recommendations.append(rule[1])
@@ -46,6 +50,8 @@ def recommend_by_type(user, mediaType):
 				applicable = False
 		if Users.userLikes(user, rule[1]):
 			applicable = False
+		if rule[1] in recommendations:
+			applicable = False
 		if applicable and Media.isType(rule[1], mediaType):
 			recommendations.append(rule[1])
 	return recommendations
@@ -61,6 +67,8 @@ def recommend_anon_by_type(mediaIDs, mediaType):
 			if not cond in mediaIDs:
 				applicable = False
 		if rule[1] in mediaIDs:
+			applicable = False
+		if rule[1] in recommendations:
 			applicable = False
 		if applicable and Media.isType(rule[1], mediaType):
 			recommendations.append(rule[1])
