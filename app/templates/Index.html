@@ -4,68 +4,81 @@
   {% if name %}
     <h1>Edit media</h1>
     <form action="Suggestions.html" method="POST">
-      <div class="col-md-3">
-        <p>Books</p>
-        <ul class="list-group">
-          {% for book in books %}
-            <li class="list-group-item">{{ book }}</li>
-          {% endfor %}
-        </ul>
-        
-        <p>Add books</p>
-        <input type="text" name="book">
-        <input type="text" name="book">
-        <input type="text" name="book">
-        <input type="text" name="book">
-        <input type="text" name="book">
+
+      <div class="row">
+        <div class="col-md-3">
+          <p>Books</p>
+          <ul class="list-group">
+            {% for book in books %}
+              <li class="list-group-item">{{ book }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <p>Shows</p>
+          <ul class="list-group">
+            {% for show in shows %}
+              <li class="list-group-item">{{ show }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <p>Movies</p>
+          <ul class="list-group">
+            {% for movie in movies %}
+              <li class="list-group-item">{{ movie }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <p>Games</p>
+          <ul class="list-group">
+            {% for game in games %}
+              <li class="list-group-item">{{ game }}</li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
 
-      <div class="col-md-3">
-        <p>Shows</p>
-        <ul class="list-group">
-          {% for show in shows %}
-            <li class="list-group-item">{{ show }}</li>
-          {% endfor %}
-        </ul>
-        
-        <p>Add shows</p>
-        <input type="text" name="show">
-        <input type="text" name="show">
-        <input type="text" name="show">
-        <input type="text" name="show">
-        <input type="text" name="show">
-      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <p>Add books</p>
+            <input type="text" name="book">
+            <input type="text" name="book">
+            <input type="text" name="book">
+            <input type="text" name="book">
+            <input type="text" name="book">
+        </div>
 
-      <div class="col-md-3">
-        <p>Movies</p>
-        <ul class="list-group">
-          {% for movie in movies %}
-            <li class="list-group-item">{{ movie }}</li>
-          {% endfor %}
-        </ul>
-        
-        <p>Add movies</p>
-        <input type="text" name="movie">
-        <input type="text" name="movie">
-        <input type="text" name="movie">
-        <input type="text" name="movie">
-        <input type="text" name="movie">
-      </div>
+        <div class="col-md-3">
+          <p>Add shows</p>
+          <input type="text" name="show">
+          <input type="text" name="show">
+          <input type="text" name="show">
+          <input type="text" name="show">
+          <input type="text" name="show">
+        </div>
 
-      <div class="col-md-3">
-        <p>Games</p>
-        <ul class="list-group">
-          {% for game in games %}
-            <li class="list-group-item">{{ game }}</li>
-          {% endfor %}
-        </ul>
-        
-        <p>Add games</p>
-        <input type="text" name="game">
-        <input type="text" name="game">
-        <input type="text" name="game">
-        <input type="text" name="game">
-        <input type="text" name="game">
+        <div class="col-md-3">
+          <p>Add movies</p>
+          <input type="text" name="movie">
+          <input type="text" name="movie">
+          <input type="text" name="movie">
+          <input type="text" name="movie">
+          <input type="text" name="movie">
+        </div>
+
+        <div class="col-md-3">
+          <p>Add games</p>
+          <input type="text" name="game">
+          <input type="text" name="game">
+          <input type="text" name="game">
+          <input type="text" name="game">
+          <input type="text" name="game">
+        </div>
       </div>
 
       <p>
