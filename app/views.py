@@ -160,28 +160,28 @@ def suggestions():
             book = find(ID)
             books.append(book["title"])
             bookSearch = "book " + book["title"]
-            bookUrls.append(getImageUrl(bookSearch))
+            #bookUrls.append(getImageUrl(bookSearch))
 
         recShows = recommend_by_type(current_user._id, "tv show")        
         for ID in recShows:
             show = find(ID)
             shows.append(show["title"])
             showSearch = "show " + show["title"]
-            showUrls.append(getImageUrl(showSearch))
+            #showUrls.append(getImageUrl(showSearch))
 
         recMovies = recommend_by_type(current_user._id, "movie")        
         for ID in recMovies:
             movie = find(ID)
             movies.append(movie["title"])
             movieSearch = "movie " + movie["title"]
-            movieUrls.append(getImageUrl(movieSearch))
+            #movieUrls.append(getImageUrl(movieSearch))
 
         recGames = recommend_by_type(current_user._id, "videogame")        
         for ID in recGames:
             game = find(ID)
             games.append(game["title"])
             gameSearch = "game " + movie["title"]
-            gameUrls.append(getImageUrl(gameSearch))
+            #gameUrls.append(getImageUrl(gameSearch))
 
 
         return render_template("Suggestions.html", name=current_user.username, books=books, bookUrls=bookUrls, shows=shows, showUrls=showUrls, movies=movies, movieUrls=movieUrls, games=games, gameUrls=gameUrls)
@@ -202,31 +202,32 @@ def suggestions():
             book = find(ID)
             books.append(book["title"])
             bookSearch = "book " + book["title"]
-            bookUrls.append(getImageUrl(bookSearch))
+            #bookUrls.append(getImageUrl(bookSearch))
 
         recShows = recommend_anon_by_type(media_list, "tv show")        
         for ID in recShows:
             show = find(ID)
             shows.append(show["title"])
             showSearch = "show " + show["title"]
-            showUrls.append(getImageUrl(showSearch))
+            #showUrls.append(getImageUrl(showSearch))
 
         recMovies = recommend_anon_by_type(media_list, "movie")        
         for ID in recMovies:
             movie = find(ID)
             movies.append(movie["title"])
             movieSearch = "movie " + movie["title"]
-            movieUrls.append(getImageUrl(movieSearch))
+            #movieUrls.append(getImageUrl(movieSearch))
 
         recGames = recommend_anon_by_type(media_list, "videogame")  
         for ID in recGames:
             game = find(ID)
             games.append(game["title"])
             gameSearch = "game " + game["title"]
-            gameUrls.append(getImageUrl(gameSearch))
+            #gameUrls.append(getImageUrl(gameSearch))
 
         return render_template("Suggestions.html", name=None, books=books, bookUrls=bookUrls, shows=shows, showUrls=showUrls, movies=movies, movieUrls=movieUrls, games=games, gameUrls=gameUrls, submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
 
+#Rest Service used through Google API that returns a JSON file for image search
 def getImageUrl(bookSearch):
     url = ('https://ajax.googleapis.com/ajax/services/search/images?' 
     +'v=1.0&q=' + bookSearch)
