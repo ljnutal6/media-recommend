@@ -10,7 +10,7 @@ from forms import LoginForm, CreateAccountForm
 from user import User
 import re
 import time
-import urllib.request as urllib2
+import urllib2
 import simplejson
 import dataMiner
 from recommender import *
@@ -31,7 +31,6 @@ def login():
     username = form.username.data
     password = form.password.data
     if validate(username, password):
-        print(get_by_username(username))
         login_user(User(get_by_username(username)))
     return redirect(url_for("index"))
 
@@ -56,8 +55,6 @@ def mine_if_necessary():
 @app.route('/index.html')
 @app.route('/Index.html')
 def index():
-    #logout_user()
-    print(current_user)
     if current_user.get_id():
         books = []
         shows = []
@@ -87,9 +84,8 @@ def index():
     dataInfo = data['results']
     imageObject = dataInfo[0]
     imageUrl = imageObject['unescapedUrl']    
-    print(imageUrl)
 
-    return render_template("Index.html", name=None, imageName=imageUrl)
+    return render_template("Index.html", name=None)
 
 #Try It Now routing
 @app.route('/TryItNow.html')
@@ -180,7 +176,7 @@ def suggestions():
         for ID in recGames:
             game = find(ID)
             games.append(game["title"])
-            gameSearch = "game " + movie["title"]
+            gameSearch = "game " + game["title"]
             #gameUrls.append(getImageUrl(gameSearch))
 
 
@@ -239,7 +235,6 @@ def getImageUrl(bookSearch):
     dataInfo = data['results']
     imageObject = dataInfo[0]
     imageUrl = imageObject['unescapedUrl']    
-    print(imageUrl)
     return imageUrl
 
 
