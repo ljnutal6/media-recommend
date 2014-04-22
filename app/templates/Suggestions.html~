@@ -5,7 +5,6 @@
 
   <div class="col-md-3">
     <p>Books</p>
-    <img src="/static/Book.png">
     <ul class="list-group">
       {% for book in books %}
         <li class="list-group-item">{{ book }}</li>

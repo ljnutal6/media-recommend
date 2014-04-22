@@ -9,6 +9,9 @@
       {% for book in books %}
         <li class="list-group-item">{{ book }}</li>
       {% endfor %}
+      {% for book in bookUrls %}
+        <img src={{book}} width="50px" height="50px">
+      {% endfor %}
     </ul>
   </div>
 
