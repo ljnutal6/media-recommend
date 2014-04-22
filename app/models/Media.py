@@ -46,7 +46,7 @@ def add_tvshow(title, producer, seasons, episodes, actors, premier):
     return tvshow_id
     
 def add_videogame(title, publisher, developer, system, release, rating):
-    videogame = {"type": "videogame", 
+    videogame = {"type": "videogame",
                  "title": title,
                  "searchable title": title.lower(),
                  "publisher": publisher,
@@ -61,16 +61,17 @@ def find(media_id):
     return collection.find_one({"_id": media_id})
     
 def getID(title, media_type):
+    title = title.lower()
     media = collection.find_one({"type": media_type, "title": title})
     if media is None:
         if media_type == "book":
-            return add_book(title, "", "", "", "", "", "")
+            return add_book(title, "", "", "", "", "")
         elif media_type == "videogame":
-            return add_videogame(title, "", "", "", "", "", "")
+            return add_videogame(title, "", "", "", "", "")
         elif media_type == "movie":
-            return add_movie(title, "", "", "", "", "", "")
+            return add_movie(title, "", "", "", "", "")
         else:
-            return add_tvshow(title, "", "", "", "", "", "")
+            return add_tvshow(title, "", "", "", "", "")
     else:
         return media["_id"]
     
@@ -89,5 +90,5 @@ def update(media_id, field, newValue):
 	media[field] = newValue
 	collection.save(media)
 	
-def search_byphrase(phrase):
-	return find( { "$text": { "$search": "\"" + phrase.lower() + "\"" } } )
+#def search_byphrase(phrase):
+	#return find( { "$text": { "$search": "\"" + phrase.lower() + "\"" } } )
