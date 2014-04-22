@@ -107,6 +107,6 @@ def isSorted(list):
 
 def dataMine():
 	rules = Rulesets(frequentItemSets())
-  Rule.remove_all()
+	Rule.remove_all()
 	for rule in rules:
 		Rule.add_rule(rule[0],rule[1],rule[2])

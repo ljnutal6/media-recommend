@@ -1,21 +1,22 @@
 import sys
 import time
-sys.path.append('app')
-sys.path.append('app/models')
+sys.path.insert(0,'app')
+sys.path.insert(0,'app/models')
 
 from flask import render_template, redirect, url_for, request, flash
 from app import app, lm
 from flask.ext.login import LoginManager, login_user, logout_user, current_user, login_required
 from forms import LoginForm, CreateAccountForm
-#from user import User
+from user import User
 import re
 import time
 import urllib2
 import simplejson
-#from recommender import *
-#from Rule import *
-#from Users import *
-#from Media import *
+import dataMiner
+from recommender import *
+from Rule import *
+from Users import *
+from Media import *
 
 last_mine_time = time.time()
 last_mine_length = 0
@@ -48,6 +49,7 @@ def mine_if_necessary():
         dataMiner.dataMine()
         last_mine_time = start
         last_mine_length = time.time() - start
+    return redirect(url_for("index"))	
 
 #Index Routing
 @app.route('/')
@@ -220,7 +222,7 @@ def suggestions():
         for ID in recGames:
             game = find(ID)
             games.append(game["title"])
-            gameSearch = "game " + movie["title"]
+            gameSearch = "game " + game["title"]
             gameUrls.append(getImageUrl(gameSearch))
 
         return render_template("Suggestions.html", name=None, books=books, bookUrls=bookUrls, shows=shows, showUrls=showUrls, movies=movies, movieUrls=movieUrls, games=games, gameUrls=gameUrls, submittedBooks=filter(None, request.form.getlist("book")),submittedShows=filter(None, request.form.getlist("show")),submittedMovies=filter(None, request.form.getlist("movie")),submittedGames=filter(None, request.form.getlist("game")))
