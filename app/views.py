@@ -245,7 +245,10 @@ def getImageUrl(bookSearch):
     # Process the JSON string.
     results = simplejson.load(response)
     data = results['responseData']
-    dataInfo = data['results']
+    if data:
+        dataInfo = data['results']
+    else:
+        return ""
     imageObject = dataInfo[0]
     imageUrl = imageObject['tbUrl']    
     return imageUrl

@@ -2,8 +2,8 @@
 
 {% block content %}
   <h1>Create an account</h1>
-
-  <form action="DoneWithAccount" method="POST">
+  <br>
+  <form action="DoneWithAccount" method="POST" style="text-align: center;">
     {% for book in books %}
       <input type="hidden" name="book" value="{{ book }}">
     {% endfor %}
@@ -27,7 +27,7 @@
     <p>
       Password: <input type="password" name="password">
     </p>
-
+    <br>
     <p>
       <button type="submit" class="btn btn-primary btn-lg" role="button">
         Finish creating account

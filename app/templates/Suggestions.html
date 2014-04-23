@@ -52,7 +52,7 @@
   </div>
 
   {% if name %}
-    <p>
+    <p style="text-align: center;">
         <a href="Index.html" class="btn btn-primary btn-lg" role="button">
           Go back and edit media
         </a>
@@ -74,12 +74,13 @@
       {% for game in submittedGames %}
         <input type="hidden" name="game" value="{{ game }}">
       {% endfor %}
-
-      <p>
-          <button type="submit" class="btn btn-primary btn-lg" role="button">
-            Make an account to store media
-          </button>
-      </p>
+      <h1>
+        <p>
+            <button type="submit" class="btn btn-primary btn-lg" role="button">
+              Make an account to store media
+            </button>
+        </p>
+      </h1>
     </form>
   {% endif %}
 

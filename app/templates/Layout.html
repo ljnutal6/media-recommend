@@ -6,6 +6,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      h1{text-align:center};
+    </style>
   </head>
 
   <body>
@@ -14,11 +17,17 @@
       <div class="container">
       
         <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <a class="navbar-brand" href="Index.html">Recommedia</a>
         </div>
         
         <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form"
+          <form class="nav navbar-form navbar-right" role="form"
 
             {% if name %}action="logout" method="POST">
               <font color="white">
