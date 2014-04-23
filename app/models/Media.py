@@ -107,6 +107,11 @@ def listTitles():
 
 def addAlias(master, duplicate):
 	update(master, "alias", duplicate)
+
+def removeAlias(item_id):
+	item = find(item_id)
+	item.pop("alias", None)
+	collection.save(item)
 	
 #def search_byphrase(phrase):
 	#return find( { "$text": { "$search": "\"" + phrase.lower() + "\"" } } )
