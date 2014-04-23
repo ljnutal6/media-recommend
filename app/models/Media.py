@@ -61,7 +61,8 @@ def find(media_id):
     return collection.find_one({"_id": media_id})
     
 def getID(title, media_type):
-    media = collection.find_one({"type": media_type, "searchable title": title.lower()})
+    title = title.lower()
+    media = collection.find_one({"type": media_type, "searchable title": title})
     if media is None:
         if media_type == "book":
             return add_book(title, "", "", "", "", "")
@@ -79,6 +80,13 @@ def getMediaIDs():
     for item in collection.find():
     	ids.append(item["_id"])
     return ids
+
+def getMediaIDsMinusAliases():
+    ids = []
+    for item in collection.find():
+	if not "alias" in item:
+    		ids.append(item["_id"])
+    return ids
     
 def isType(media_id, media_type):
 	media = find(media_id)
@@ -88,6 +96,17 @@ def update(media_id, field, newValue):
 	media = find(media_id)
 	media[field] = newValue
 	collection.save(media)
+
+def listTitles():
+	media = getMediaIDs()
+	for i in range(0, len(media)):
+		if "alias" in find(media[i]):
+			print str(i) + " " + find(media[i])["title"] + " (alias for " + find(find(media[i])["alias"])["title"] + ")"
+		else:
+			print str(i) + " " + find(media[i])["title"]
+
+def addAlias(master, duplicate):
+	update(master, "alias", duplicate)
 	
 #def search_byphrase(phrase):
 	#return find( { "$text": { "$search": "\"" + phrase.lower() + "\"" } } )

@@ -13,7 +13,7 @@ def frequentItemSets():
 	itemSets = []
 	firstRound = []
 	mostRecentRound = []
-	items = Media.getMediaIDs()
+	items = Media.getMediaIDsMinusAliases()
 	candidates = []
 	for item in items:
 		candidates.append([item])
