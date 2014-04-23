@@ -61,17 +61,31 @@ def index():
         shows = []
         movies = []
         games = []
+        
+        bookUrls = []
+        showUrls = []
+        movieUrls = []
+        gameUrls = []
+        
         for ID in get(current_user._id)["favorites"]:
             media = find(ID)
             if media["type"] == "book":
                 books.append(media["title"])
+                bookSearch = "book " + media["title"]
+                bookUrls.append(getImageUrl(bookSearch))
             if media["type"] == "tv show":
                 shows.append(media["title"])
+                showSearch = "show " + media["title"]
+                showUrls.append(getImageUrl(showSearch))
             if media["type"] == "movie":
                 movies.append(media["title"])
+                movieSearch = "movie " + media["title"]
+                movieUrls.append(getImageUrl(movieSearch))
             if media["type"] == "videogame":
                 games.append(media["title"])
-        return render_template("Index.html", name=current_user.username, books=books, shows=shows, movies=movies, games=games)
+                gameSearch = "game " + media["title"]
+                gameUrls.append(getImageUrl(gameSearch))
+        return render_template("Index.html", name=current_user.username, books=books, bookUrls=bookUrls, shows=shows, showUrls=showUrls, movies=movies, movieUrls=movieUrls, games=games, gameUrls=gameUrls)
     url = ('https://ajax.googleapis.com/ajax/services/search/images?' 
     +'v=1.0&q=barack%20obama')
 
