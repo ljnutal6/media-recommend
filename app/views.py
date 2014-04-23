@@ -247,7 +247,7 @@ def getImageUrl(bookSearch):
     data = results['responseData']
     dataInfo = data['results']
     imageObject = dataInfo[0]
-    imageUrl = imageObject['unescapedUrl']    
+    imageUrl = imageObject['tbUrl']    
     return imageUrl
 
 
