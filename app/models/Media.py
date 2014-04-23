@@ -60,17 +60,20 @@ def add_videogame(title, publisher, developer, system, release, rating):
 def find(media_id):
     return collection.find_one({"_id": media_id})
     
-def getID(title, media_type):
+def getID(title, media_type, create=True):
     media = collection.find_one({"type": media_type, "searchable title": title.lower()})
     if media is None:
-        if media_type == "book":
-            return add_book(title, "", "", "", "", "")
-        elif media_type == "videogame":
-            return add_videogame(title, "", "", "", "", "")
-        elif media_type == "movie":
-            return add_movie(title, "", "", "", "", "")
+        if create:
+            if media_type == "book":
+                return add_book(title, "", "", "", "", "")
+            elif media_type == "videogame":
+                return add_videogame(title, "", "", "", "", "")
+            elif media_type == "movie":
+                return add_movie(title, "", "", "", "", "")
+            else:
+                return add_tvshow(title, "", "", "", "", "")
         else:
-            return add_tvshow(title, "", "", "", "", "")
+            return None
     else:
         return media["_id"]
     
@@ -92,8 +95,7 @@ def isType(media_id, media_type):
 	return media["type"] == media_type
 	
 def update(media_id, field, newValue):
-	media = find(media_id)
-	media[field] = newValue
+	media = collection.update({"_id":media_id},{"$set":{field:newValue}})
 	collection.save(media)
 
 def listTitles():

@@ -1,0 +1,194 @@
+{% extends "Layout.html" %}
+
+{% block content %}
+  <h1>{{ media["title"] }}</h1>
+  <form action="Media.html" method="POST">
+    <input type="hidden" name="name" value="{{ media['title'] }}">
+    <input type="hidden" name="type" value="{{ media['type'] }}">
+    <input type="hidden" name="last" value="{{ last }}">
+    <p style="text-align: center;">
+      {% if media["type"] == "book" %}
+        <div class="row">
+          <div class="col-md-2">
+            Title:
+          </div>
+          <div class="col-md-2">
+            {{ media["title"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="title">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Authors:
+          </div>
+          <div class="col-md-2">
+            {{ media["authors"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="authors">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Publication date:
+          </div>
+          <div class="col-md-2">
+            {{ media["original publication date"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="original_publication_date">
+          </div>
+        </div>
+      {% endif %}
+      
+      {% if media["type"] == "tv show" %}
+        <div class="row">
+          <div class="col-md-2">
+            Title:
+          </div>
+          <div class="col-md-2">
+            {{ media["title"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="title">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Producer:
+          </div>
+          <div class="col-md-2">
+            {{ media["producer"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="producer">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Leading actors:
+          </div>
+          <div class="col-md-2">
+            {{ media["leading actors"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="leading_actors">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Premier date:
+          </div>
+          <div class="col-md-2">
+            {{ media["premier date"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="premier_date">
+          </div>
+        </div>
+      {% endif %}
+      
+      {% if media["type"] == "movie" %}
+        <div class="row">
+          <div class="col-md-2">
+            Title:
+          </div>
+          <div class="col-md-2">
+            {{ media["title"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="title">
+          </div>
+        </div>
+              <div class="row">
+          <div class="col-md-2">
+            MPAA rating:
+          </div>
+          <div class="col-md-2">
+            {{ media["MPAA rating"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="MPAA_rating">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Leading actors:
+          </div>
+          <div class="col-md-2">
+            {{ media["leading actors"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="leading_actors">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Release year:
+          </div>
+          <div class="col-md-2">
+            {{ media["release year"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="release_year">
+          </div>
+        </div>
+      {% endif %}
+      
+      {% if media["type"] == "videogame" %}
+              <div class="row">
+          <div class="col-md-2">
+            Title:
+          </div>
+          <div class="col-md-2">
+            {{ media["title"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="title">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Developer:
+          </div>
+          <div class="col-md-2">
+            {{ media["developer"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="developer">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Release year:
+          </div>
+          <div class="col-md-2">
+            {{ media["release year"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="release_year">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            ESRB rating:
+          </div>
+          <div class="col-md-2">
+            {{ media["ESRB rating"] }}
+          </div>
+          <div class="col-md-2">
+            <input type="text" placeholder="Edit value" name="ESRB_rating">
+          </div>
+        </div>
+      {% endif %}
+      <button type="submit" class="btn btn-primary btn-lg" role="button">
+        Save changes
+      </button>
+      <a href="{{ last }}" class="btn btn-primary btn-lg" role="button">
+        Go back
+      </a>
+    </p>
+  </form>
+{% endblock %}

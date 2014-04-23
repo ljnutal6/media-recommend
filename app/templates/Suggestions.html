@@ -9,7 +9,9 @@
         {% for i in range(0, books|length) %}
           <li class="list-group-item">
             <img src={{bookUrls[i]}} width="50px" height="50px">
-            {{ books[i] }}
+            <a href="Media.html?name={{ books[i]|urlencode }}&type=book&last=Suggestions.html">
+              {{ books[i] }}
+            </a>
           </li>
         {% endfor %}
     </ul>
@@ -21,7 +23,9 @@
         {% for i in range(0, shows|length) %}
           <li class="list-group-item">
             <img src={{showUrls[i]}} width="50px" height="50px">
-            {{ shows[i] }}
+            <a href="Media.html?name={{ shows[i]|urlencode }}&type=tv+show&last=Suggestions.html">
+              {{ shows[i] }}
+            </a>
           </li>
         {% endfor %}
     </ul>
@@ -33,7 +37,9 @@
         {% for i in range(0, movies|length) %}
           <li class="list-group-item">
             <img src={{movieUrls[i]}} width="50px" height="50px">
-            {{ movies[i] }}
+            <a href="Media.html?name={{ movies[i]|urlencode }}&type=movie&last=Suggestions.html">
+              {{ movies[i] }}
+            </a>
           </li>
         {% endfor %}
     </ul>
@@ -45,7 +51,9 @@
         {% for i in range(0, games|length) %}
           <li class="list-group-item">
             <img src={{gameUrls[i]}} width="50px" height="50px">
-            {{ games[i] }}
+            <a href="Media.html?name={{ games[i]|urlencode }}&type=videogame&last=Suggestions.html">
+              {{ games[i] }}
+            </a>
           </li>
         {% endfor %}
     </ul>

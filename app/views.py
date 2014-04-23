@@ -51,6 +51,29 @@ def mine_if_necessary():
         last_mine_length = time.time() - start
     return redirect(url_for("index"))	
 
+@app.route("/Media.html", methods=["GET","POST"])
+@login_required
+def media():
+    try:
+        if request.method == "POST":
+            print "POST"
+            for input in request.form:
+                if input != "name" and input != "type" and input != "last" and request.form[input] != "":
+                    update(getID(request.form["name"], request.form["type"]), input.replace("_", " "), request.form[input])
+            return render_template("Media.html", media=find(getID(request.form["name"],request.form["type"])), last=request.form["last"])
+        else:
+            print "GET"
+            print request.args["name"]
+            print request.args["type"]
+            print request.args["last"]
+            return render_template("Media.html", media=find(getID(request.args["name"],request.args["type"])), last=request.args["last"])
+    except:
+        if "last" in request.args:
+            if request.args["last"] == "Suggestions.html":
+                return redirect(url_for("suggestions"))
+        return redirect(url_for("index"))
+    return redirect(url_for("index"))
+
 #Index Routing
 @app.route('/')
 @app.route('/index.html')
