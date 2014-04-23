@@ -61,8 +61,7 @@ def find(media_id):
     return collection.find_one({"_id": media_id})
     
 def getID(title, media_type):
-    title = title.lower()
-    media = collection.find_one({"type": media_type, "searchable title": title})
+    media = collection.find_one({"type": media_type, "searchable title": title.lower()})
     if media is None:
         if media_type == "book":
             return add_book(title, "", "", "", "", "")

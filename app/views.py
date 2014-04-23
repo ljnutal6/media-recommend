@@ -85,20 +85,7 @@ def index():
                 games.append(media["title"])
                 gameSearch = "game " + media["title"]
                 gameUrls.append(getImageUrl(gameSearch))
-        return render_template("Index.html", name=current_user.username, books=books, bookUrls=bookUrls, shows=shows, showUrls=showUrls, movies=movies, movieUrls=movieUrls, games=games, gameUrls=gameUrls)
-    url = ('https://ajax.googleapis.com/ajax/services/search/images?' 
-    +'v=1.0&q=barack%20obama')
-
-    request = urllib2.Request(url, None, {'Referer': "http://localhost:5000/"})
-    response = urllib2.urlopen(request)
-
-    # Process the JSON string.
-    results = simplejson.load(response)
-	
-    data = results['responseData']
-    dataInfo = data['results']
-    imageObject = dataInfo[0]
-    imageUrl = imageObject['unescapedUrl']    
+        return render_template("Index.html", name=current_user.username, books=books, bookUrls=bookUrls, shows=shows, showUrls=showUrls, movies=movies, movieUrls=movieUrls, games=games, gameUrls=gameUrls)   
 
     return render_template("Index.html", name=None)
 
@@ -141,6 +128,19 @@ def createAccount():
         return redirect(url_for("index"))
     return render_template("CreateAccount.html", books=books, shows=shows, movies=movies, games=games)
 
+@app.route('/Save', methods=["GET", "POST"])
+@login_required
+def save():
+    #for book in filter(None, request.form.getlist("book")):
+    #    add_favorite(current_user._id, getID(book, "book"))
+    #for show in filter(None, request.form.getlist("show")):
+    #    add_favorite(current_user._id, getID(show, "tv show"))
+    #for movie in filter(None, request.form.getlist("movie")):
+    #    add_favorite(current_user._id, getID(movie, "movie"))
+    #for game in filter(None, request.form.getlist("game")):
+    #    add_favorite(current_user._id, getID(game, "videogame"))
+    return redirect(url_for("index"))
+    
 #Suggestions routing
 @app.route('/Suggestions.html',  methods=["GET", "POST"])
 def suggestions():
