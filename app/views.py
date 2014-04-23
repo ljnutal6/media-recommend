@@ -131,14 +131,14 @@ def createAccount():
 @app.route('/Save', methods=["GET", "POST"])
 @login_required
 def save():
-    #for book in filter(None, request.form.getlist("book")):
-    #    add_favorite(current_user._id, getID(book, "book"))
-    #for show in filter(None, request.form.getlist("show")):
-    #    add_favorite(current_user._id, getID(show, "tv show"))
-    #for movie in filter(None, request.form.getlist("movie")):
-    #    add_favorite(current_user._id, getID(movie, "movie"))
-    #for game in filter(None, request.form.getlist("game")):
-    #    add_favorite(current_user._id, getID(game, "videogame"))
+    for book in filter(None, request.form.getlist("book")):
+        add_favorite(current_user._id, getID(book, "book"))
+    for show in filter(None, request.form.getlist("show")):
+        add_favorite(current_user._id, getID(show, "tv show"))
+    for movie in filter(None, request.form.getlist("movie")):
+        add_favorite(current_user._id, getID(movie, "movie"))
+    for game in filter(None, request.form.getlist("game")):
+        add_favorite(current_user._id, getID(game, "videogame"))
     return redirect(url_for("index"))
     
 #Suggestions routing

@@ -11,8 +11,8 @@
           <ul class="list-group">
             {% for i in range(0, books|length) %}
               <li class="list-group-item">
-                {{ books[i] }}
                 <img src={{bookUrls[i]}} width="50px" height="50px">
+                {{ books[i] }}
               </li>
             {% endfor %}
           </ul>
@@ -23,8 +23,8 @@
           <ul class="list-group">
             {% for i in range(0, shows|length) %}
               <li class="list-group-item">
-                {{ shows[i] }}
                 <img src={{showUrls[i]}} width="50px" height="50px">
+                {{ shows[i] }}
               </li>
             {% endfor %}
           </ul>
@@ -35,8 +35,8 @@
           <ul class="list-group">
             {% for i in range(0, movies|length) %}
               <li class="list-group-item">
-                {{ movies[i] }}
                 <img src={{movieUrls[i]}} width="50px" height="50px">
+                {{ movies[i] }}
               </li>
             {% endfor %}
           </ul>
@@ -47,8 +47,8 @@
           <ul class="list-group">
             {% for i in range(0, games|length) %}
               <li class="list-group-item">
-                {{ games[i] }}
                 <img src={{gameUrls[i]}} width="50px" height="50px">
+                {{ games[i] }}
               </li>
             {% endfor %}
           </ul>
@@ -95,9 +95,13 @@
 
       <p>
         <h1>
+          <button type="submit" class="btn btn-primary btn-lg" role="button"  onclick='this.form.action="Save";'>
+            Save
+          </button>
+
           <button type="submit" class="btn btn-primary btn-lg" role="button">
-            See suggestions
-          </a>
+            Save and see suggestions
+          </button>
         </h1>
       </p>
     </form>
