@@ -6,48 +6,48 @@
   <div class="col-md-3">
     <p><img src="/static/Book.png"> Books</p>
     <ul class="list-group">
-      {% for book in books %}
-        <li class="list-group-item">{{ book }}</li>
-      {% endfor %}
-      {% for book in bookUrls %}
-        <img src={{book}} width="50px" height="50px">
-      {% endfor %}
+        {% for i in range(0, books|length) %}
+          <li class="list-group-item">
+            {{ books[i] }}
+            <img src={{bookUrls[i]}} width="50px" height="50px">
+          </li>
+        {% endfor %}
     </ul>
   </div>
 
   <div class="col-md-3">
     <p><img src="/static/TV.png"> Shows</p>
     <ul class="list-group">
-      {% for show in shows %}
-        <li class="list-group-item">{{ show }}</li>
-      {% endfor %}
-      {% for show in showUrls %}
-        <img src={{show}} width="50px" height="50px">
-      {% endfor %}
+        {% for i in range(0, shows|length) %}
+          <li class="list-group-item">
+            {{ shows[i] }}
+            <img src={{showUrls[i]}} width="50px" height="50px">
+          </li>
+        {% endfor %}
     </ul>
   </div>
 
   <div class="col-md-3">
     <p><img src="/static/Movie.png"> Movies</p>
     <ul class="list-group">
-      {% for movie in movies %}
-        <li class="list-group-item">{{ movie }}</li>
-      {% endfor %}
-      {% for movie in movieUrls %}
-        <img src={{movie}} width="50px" height="50px">
-      {% endfor %}
+        {% for i in range(0, movies|length) %}
+          <li class="list-group-item">
+            {{ movies[i] }}
+            <img src={{movieUrls[i]}} width="50px" height="50px">
+          </li>
+        {% endfor %}
     </ul>
   </div>
 
   <div class="col-md-3">
     <p><img src="/static/GamePad.png"> Games</p>
     <ul class="list-group">
-      {% for game in games %}
-        <li class="list-group-item">{{ game }}</li>
-      {% endfor %}
-      {% for game in gameUrls %}
-        <img src={{movie}} width="50px" height="50px">
-      {% endfor %}
+        {% for i in range(0, games|length) %}
+          <li class="list-group-item">
+            {{ games[i] }}
+            <img src={{gameUrls[i]}} width="50px" height="50px">
+          </li>
+        {% endfor %}
     </ul>
   </div>
 
