@@ -16,7 +16,7 @@
             {{ media["title"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="title">
+            {% if name %}<input type="text" placeholder="Edit value" name="title">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -27,7 +27,7 @@
             {{ media["authors"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="authors">
+            {% if name %}<input type="text" placeholder="Edit value" name="authors">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -38,7 +38,7 @@
             {{ media["original publication date"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="original_publication_date">
+            {% if name %}<input type="text" placeholder="Edit value" name="original_publication_date">{% endif %}
           </div>
         </div>
       {% endif %}
@@ -52,7 +52,7 @@
             {{ media["title"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="title">
+            {% if name %}<input type="text" placeholder="Edit value" name="title">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -63,7 +63,7 @@
             {{ media["producer"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="producer">
+            {% if name %}<input type="text" placeholder="Edit value" name="producer">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -74,7 +74,7 @@
             {{ media["leading actors"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="leading_actors">
+            {% if name %}<input type="text" placeholder="Edit value" name="leading_actors">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -85,7 +85,7 @@
             {{ media["premier date"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="premier_date">
+            {% if name %}<input type="text" placeholder="Edit value" name="premier_date">{% endif %}
           </div>
         </div>
       {% endif %}
@@ -99,7 +99,7 @@
             {{ media["title"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="title">
+            {% if name %}<input type="text" placeholder="Edit value" name="title">{% endif %}
           </div>
         </div>
               <div class="row">
@@ -110,7 +110,7 @@
             {{ media["MPAA rating"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="MPAA_rating">
+            {% if name %}<input type="text" placeholder="Edit value" name="MPAA_rating">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -121,7 +121,7 @@
             {{ media["leading actors"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="leading_actors">
+            {% if name %}<input type="text" placeholder="Edit value" name="leading_actors">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -132,7 +132,7 @@
             {{ media["release year"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="release_year">
+            {% if name %}<input type="text" placeholder="Edit value" name="release_year">{% endif %}
           </div>
         </div>
       {% endif %}
@@ -146,7 +146,7 @@
             {{ media["title"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="title">
+            {% if name %}<input type="text" placeholder="Edit value" name="title">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -157,7 +157,7 @@
             {{ media["developer"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="developer">
+            {% if name %}<input type="text" placeholder="Edit value" name="developer">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -168,7 +168,7 @@
             {{ media["release year"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="release_year">
+            {% if name %}<input type="text" placeholder="Edit value" name="release_year">{% endif %}
           </div>
         </div>
         <div class="row">
@@ -179,13 +179,15 @@
             {{ media["ESRB rating"] }}
           </div>
           <div class="col-md-2">
-            <input type="text" placeholder="Edit value" name="ESRB_rating">
+            {% if name %}<input type="text" placeholder="Edit value" name="ESRB_rating">{% endif %}
           </div>
         </div>
       {% endif %}
-      <button type="submit" class="btn btn-primary btn-lg" role="button">
-        Save changes
-      </button>
+      {% if name %}
+        <button type="submit" class="btn btn-primary btn-lg" role="button">
+          Save changes
+        </button>
+      {% endif %}
       <a href="{{ last }}" class="btn btn-primary btn-lg" role="button">
         Go back
       </a>
