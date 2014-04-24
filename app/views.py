@@ -66,6 +66,7 @@ def media():
                     update(getID(request.form["name"], request.form["type"]), input.replace("_", " "), request.form[input])
             if getID(request.form["name"],request.form["type"], False) == None:
                 raise
+            update(getID(request.form["name"],request.form["type"], False), "url", getImageUrl(request.form["type"] + " " + request.form["name"]))
             return render_template("Media.html", name=name, media=find(getID(request.form["name"],request.form["type"], False)), last=request.form["last"])
         else:
             if getID(request.args["name"],request.args["type"], False) == None:
