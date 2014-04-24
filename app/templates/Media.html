@@ -1,7 +1,11 @@
 {% extends "Layout.html" %}
 
 {% block content %}
-  <h1>{{ media["title"] }}</h1>
+  <h1>
+    {{ media["title"] }}
+    <br>
+    <img src="{{ media['url'] }}">
+  </h1>
   <form action="Media.html" method="POST">
     <input type="hidden" name="name" value="{{ media['title'] }}">
     <input type="hidden" name="type" value="{{ media['type'] }}">
