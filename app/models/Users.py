@@ -55,9 +55,4 @@ def getUserIDs():
 def userLikes(user_id, media_id):
 	user = get(user_id)
 	likes = user["favorites"]
-	for like in likes:
-		item = Media.find(like)
-		if "alias" in item:
-			if item["alias"] == media_id:
-				return True
 	return media_id in likes
