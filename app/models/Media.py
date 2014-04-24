@@ -1,9 +1,29 @@
 import pymongo
 from pymongo import MongoClient
+import urllib
+import urllib2
+import simplejson
 
 client = MongoClient()
 db = client.database
 collection = db.mediaCollection
+
+def update_all():
+    records = list(collection.find({"type":"book"}))
+    for record in records:
+        collection.update({"_id":record["_id"]},{'$set':{'url':getImageUrl("book" + record["title"])}}, multi=True)
+        
+    records = list(collection.find({"type":"tv show"}))
+    for record in records:
+        collection.update({"_id":record["_id"]},{'$set':{'url':getImageUrl("show" + record["title"])}}, multi=True)
+    
+    records = list(collection.find({"type":"movie"}))
+    for record in records:
+        collection.update({"_id":record["_id"]},{'$set':{'url':getImageUrl("movie" + record["title"])}}, multi=True)
+    
+    records = list(collection.find({"type":"videogame"}))
+    for record in records:
+        collection.update({"_id":record["_id"]},{'$set':{'url':getImageUrl("game" + record["title"])}}, multi=True)
     
 def add_book(title, authors, editors, illustrators, translators, publication):
     book = {"type": "book", 
@@ -13,7 +33,7 @@ def add_book(title, authors, editors, illustrators, translators, publication):
             "editors": editors,
             "illustrators": illustrators,
             "translators": translators,
-            "original publication date": publication}
+            "original publication date": publication, "url": getImageUrl("book " + title)}
     #author_list = user["authors"]
     #for author in authors
     # author_list.append(author)
@@ -29,7 +49,7 @@ def add_movie(title, release, rating, studio, director, actors):
              "MPAA rating": rating,
              "studio": studio,
              "director": director,
-             "leading actors": actors}
+             "leading actors": actors, "url": getImageUrl("movie " + title)}
     movie_id = collection.insert(movie)
     return movie_id
     
@@ -41,7 +61,7 @@ def add_tvshow(title, producer, seasons, episodes, actors, premier):
               "number of seasons": seasons,
               "number of episodes": episodes,
               "leading actors": actors,
-              "premier date": premier}
+              "premier date": premier, "url": getImageUrl("show " + title)}
     tvshow_id = collection.insert(tvshow)
     return tvshow_id
     
@@ -53,7 +73,7 @@ def add_videogame(title, publisher, developer, system, release, rating):
                  "developer": developer,
                  "system": system,
                  "release year": release,
-                 "ESRB rating": rating}
+                 "ESRB rating": rating, "url": getImageUrl("game " + title)}
     game_id = collection.insert(videogame)
     return game_id
     
@@ -116,3 +136,22 @@ def removeAlias(item_id):
 	
 #def search_byphrase(phrase):
 	#return find( { "$text": { "$search": "\"" + phrase.lower() + "\"" } } )
+#Rest Service used through Google API that returns a JSON file for image search
+
+def getImageUrl(bookSearch):
+    url = ('https://ajax.googleapis.com/ajax/services/search/images?' 
+    + urllib.urlencode([('v',1.0),('q',bookSearch)]))
+    print url
+    response = urllib2.urlopen(url)
+    # Process the JSON string.
+    results = simplejson.load(response)
+    data = results['responseData']
+    if data:
+        dataInfo = data['results']
+    else:
+        return ""
+    if len(dataInfo) == 0:
+        return ""
+    imageObject = dataInfo[0]
+    imageUrl = imageObject['tbUrl']    
+    return imageUrl
